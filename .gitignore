@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+#VS
+egNES1/.vs/
+egNES1/x64/
