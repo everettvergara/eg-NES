@@ -38,8 +38,12 @@ namespace eg
 		status_reg SR;	// Status register(8 bit)
 		byte SP;		// Stack pointer(8 bit)
 
-		reg() : PC(0), AC(0), X(0), Y(0), SP(0) { SR.reset(); }
+		reg() : PC(0), AC(0), X(0), Y(0), SP(0) { SR.reset(); 
+		
+		constexpr auto x = sizeof(SR);
+		}
 	};
+
 
 	struct mem
 	{
@@ -106,7 +110,7 @@ namespace eg
 			--cycles_;
 
 			auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - start_).count();
-			std::this_thread::sleep_for(std::chrono::microseconds(1'000'000 / FREQ - elapsed));
+			std::this_thread::sleep_for(std::chrono::microseconds(1.0 / FREQ - elapsed));
 
 			start_ = std::chrono::steady_clock::now();
 		}

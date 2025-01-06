@@ -1,14 +1,18 @@
 // References:
 // https://www.c64-wiki.com
 // https://www.masswerk.at/6502/6502_instruction_set.html
+// https://www.nesdev.org/obelisk-6502-guide/reference.html#LDA
 
 #include <iostream>
-#include "6502.h"
+#include "m6502_generic.h"
 
-int main()
+auto main() -> int
 {
-	eg::generic_6502 test;
-	test.reset();
+	using namespace eg;
 
+	m6502::m6502_generic nes(0xFFFC, 0x0000);
+
+	nes.reset();
+	nes.execute();
 	return 0;
 }

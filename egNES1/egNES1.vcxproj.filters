@@ -18,12 +18,42 @@
     <ClCompile Include="egNES1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="6502.cpp">
+    <ClCompile Include="6502\cycle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="6502\m6502.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="6502\mem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="6502\m6502_generic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="6502.h">
+    <ClInclude Include="6502\cycle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="6502\ins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="6502\m6502.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="6502\m6502_generic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="6502\mem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="6502\reg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="6502\sr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="6502\types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
