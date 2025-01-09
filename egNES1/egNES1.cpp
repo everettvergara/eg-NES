@@ -13,6 +13,7 @@ auto main() -> int
 	m6502::m6502_generic nes(0xFFFC, 0x0000);
 
 	nes.reset();
+	nes.test_loader();
 	nes.execute();
 	return 0;
 }

@@ -1,3 +1,4 @@
+#include <cassert>
 #include "m6502.h"
 
 namespace eg::m6502
@@ -27,8 +28,10 @@ namespace eg::m6502
 	auto m6502::peek_instruction() -> std::array<byte, 2>
 	{
 		byte op_code = mem_[reg_.PC];
+		assert(op_code > 0);
 
 		auto cycles = ins[op_code].cycles;
+		assert(cycles > 0);
 
 		++reg_.PC;
 

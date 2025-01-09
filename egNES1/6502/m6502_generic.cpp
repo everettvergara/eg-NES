@@ -11,5 +11,18 @@ namespace eg::m6502
 
 	auto m6502_generic::reset() -> void
 	{
+		reg_.PC = reset_vector_addr_;
+	}
+
+	auto m6502_generic::test_loader() -> void
+	{
+		//mem_[0xfffc] = LDA_IM;
+		//mem_[0xfffd] = 'A';
+
+		//mem_[0xfffc] = LDA_IM;
+		//mem_[0xfffd] = -20;
+
+		//mem_[0xfffc] = LDA_IM;
+		//mem_[0xfffd] = 0;
 	}
 }
