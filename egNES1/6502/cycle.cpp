@@ -1,3 +1,4 @@
+#include <cassert>
 #include "cycle.h"
 
 namespace eg::m6502
@@ -12,15 +13,7 @@ namespace eg::m6502
 
 	auto cycle::simulate() -> void
 	{
-#ifdef _DEBUG
-		// Incorrect call to simulate
-		// sets the instruction bug flag to true
-
-		if (cycles_ == 0)
-		{
-			bug_ = true;
-		}
-#endif
+		assert(cycles_ > 0);
 
 		--cycles_;
 
@@ -31,11 +24,4 @@ namespace eg::m6502
 			std::this_thread::sleep_for(MICRO_SEC_PER_CYCLE - elapsed);
 		}
 	}
-
-#ifdef _DEBUG
-	auto cycle::has_bug() const -> bool
-	{
-		return bug_;
-	}
-#endif
 };

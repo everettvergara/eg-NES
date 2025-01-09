@@ -24,10 +24,5 @@ namespace eg::m6502
 
 		std::chrono::time_point<std::chrono::steady_clock> start_;
 		byte cycles_;
-
-#ifdef _DEBUG
-		bool bug_ = false;
-		auto has_bug() const -> bool;
-#endif
 	};
 }

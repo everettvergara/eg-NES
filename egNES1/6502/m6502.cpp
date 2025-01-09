@@ -43,10 +43,7 @@ namespace eg::m6502
 		const byte op_code = mem_[reg_.PC++];
 		assert(op_code > 0);
 
-		const auto cycles = ins[op_code].cycles;
-		assert(cycles > 0);
-
-		cycles_.start_and_simulate(cycles);
+		cycles_.start_and_simulate(ins[op_code].cycles);
 		return op_code;
 	}
 
