@@ -18,6 +18,8 @@ namespace eg::m6502
 		default:
 			break;
 		}
+
+		assert(cycles_.is_zero());
 	}
 
 	auto m6502::read_mem_by_badd(byte address) -> byte

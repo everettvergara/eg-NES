@@ -24,4 +24,9 @@ namespace eg::m6502
 			std::this_thread::sleep_for(MICRO_SEC_PER_CYCLE - elapsed);
 		}
 	}
+
+	auto cycle::is_zero() const -> bool
+	{
+		return cycles_ == 0;
+	}
 };

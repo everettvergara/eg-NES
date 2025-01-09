@@ -22,8 +22,8 @@ namespace eg::m6502
 		//mem_[0xfffc] = LDA_IM;
 		//mem_[0xfffd] = 'A';
 
-		//mem_[0xfffc] = LDA_IM;
-		//mem_[0xfffd] = -20;
+		mem_[0xfffc] = LDA_IM;
+		mem_[0xfffd] = -20;
 
 		//mem_[0xfffc] = LDA_IM;
 		//mem_[0xfffd] = 0;
