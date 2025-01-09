@@ -13,7 +13,9 @@ namespace eg::m6502
 		byte cycles;
 	};
 
+	// LDA - Load Accumulator
 	constexpr byte LDA_IM = 0xA9;
+	constexpr byte LDA_ZP = 0xA5;
 
 	constexpr ins_attrib ins[256] =
 	{
@@ -182,7 +184,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xA2 - 162
 		{ "-", "-", 0, 0 },		// 0xA3 - 163
 		{ "-", "-", 0, 0 },		// 0xA4 - 164
-		{ "-", "-", 0, 0 },		// 0xA5 - 165
+		{ "LDA", "ZP", 2, 3 },		// 0xA5 - 165
 		{ "-", "-", 0, 0 },		// 0xA6 - 166
 		{ "-", "-", 0, 0 },		// 0xA7 - 167
 		{ "-", "-", 0, 0 },		// 0xA8 - 168

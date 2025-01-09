@@ -2,11 +2,12 @@
 // https://www.c64-wiki.com
 // https://www.masswerk.at/6502/6502_instruction_set.html
 // https://www.nesdev.org/obelisk-6502-guide/reference.html#LDA
+// https://github.com/catchorg/Catch2
 
 #include <iostream>
 #include "m6502_generic.h"
 
-auto main() -> int
+auto main(int, char* []) -> int
 {
 	using namespace eg;
 

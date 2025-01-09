@@ -11,45 +11,80 @@ namespace eg::m6502
 
 	auto m6502::execute() -> void
 	{
-		auto [op_code, cycles] = peek_instruction();
-		cycles_.start_and_simulate(cycles);
-
-		switch (op_code)
+		switch (const auto op_code = read_instruction(); op_code)
 		{
-		case LDA_IM:
-			exec_LDA_IM_();
-			break;
-
+		case LDA_IM: exec_LDA_IM_(); break;
+		case LDA_ZP: exec_LDA_ZP_(); break;
 		default:
 			break;
 		}
 	}
 
-	auto m6502::peek_instruction() -> std::array<byte, 2>
+	auto m6502::read_mem_by_badd(byte address) -> byte
 	{
-		byte op_code = mem_[reg_.PC];
-		assert(op_code > 0);
-
-		auto cycles = ins[op_code].cycles;
-		assert(cycles > 0);
-
-		++reg_.PC;
-
-		return { op_code, cycles };
+		cycles_.simulate();
+		return mem_[address];
 	}
 
-	auto m6502::read_byte() -> byte
+	auto m6502::read_mem_by_wadd(word address) -> byte
 	{
+		cycles_.simulate();
+		return mem_[address];
+	}
+
+	auto m6502::read_mem_by_pc() -> byte
+	{
+		cycles_.simulate();
 		return mem_[reg_.PC++];
 	}
 
+	auto m6502::read_instruction() -> byte
+	{
+		const byte op_code = mem_[reg_.PC++];
+		assert(op_code > 0);
+
+		const auto cycles = ins[op_code].cycles;
+		assert(cycles > 0);
+
+		cycles_.start_and_simulate(cycles);
+		return op_code;
+	}
+
+	// LDA_IM: Immediate
+	//
+	// Immediate addressing allows the programmer to directly specify an 8 bit constant within the instruction.
+	// It is indicated by a '#' symbol followed by an numeric expression. For example:
+	// LDA #10
 	auto m6502::exec_LDA_IM_() -> void
 	{
-		byte value = read_byte();
+		byte value = read_mem_by_pc();
+		exec_LDA_set_AZN(value);
+	}
+
+	// LDA_ZP: Zero Page
+	//
+	// An instruction using zero page addressing mode has only an 8 bit address operand.
+	// This limits it to addressing only the first 256 bytes of memory(e.g.$0000 to $00FF) where
+	// the most significant byte of the address is always zero.
+	//
+	// In zero page mode only the least significant byte of the address is held in the instruction
+	// making it shorter by one byte(important for space saving) and one less memory fetch during
+	// execution(important for speed).
+	//
+	// An assembler will automatically select zero page addressing mode if the operand evaluates
+	// to a zero page address and the instruction supports the mode(not all do).
+
+	auto m6502::exec_LDA_ZP_() -> void
+	{
+		const byte badd = read_mem_by_pc();
+		byte value = read_mem_by_badd(badd);
+		exec_LDA_set_AZN(value);
+	}
+
+	auto m6502::exec_LDA_set_AZN(byte value) -> void
+	{
 		reg_.AC = value;
 		reg_.SR.Z = (value == 0);
 		reg_.SR.N = (value & 0b10000000) > 0;
-
-		cycles_.simulate();
 	}
 }
