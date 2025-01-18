@@ -11,6 +11,11 @@ namespace eg::m6502
 		simulate();
 	}
 
+	auto cycle::add(byte cycles) -> void
+	{
+		cycles_ += cycles;
+	}
+
 	auto cycle::simulate() -> void
 	{
 		assert(cycles_ > 0);

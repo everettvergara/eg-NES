@@ -44,9 +44,45 @@ namespace eg::m6502
 		//mem_[0x0000] = 0;
 
 		// LDA_ZPX
-		reg_.X = 0x80;
-		mem_[reset_vector_addr_] = LDA_ZPX;
-		mem_[reset_vector_addr_ + 1] = 0x0f;
-		mem_[0x008f] = 'A';
+		//reg_.X = 0x80;
+		//mem_[reset_vector_addr_] = LDA_ZPX;
+		//mem_[reset_vector_addr_ + 1] = 0x0f;
+		//mem_[0x008f] = 'A';
+
+		// LDA_ABS
+		//mem_[reset_vector_addr_] = LDA_ABS;
+
+		//// value: 257
+		//mem_[reset_vector_addr_ + 1] = 0x02;
+		//mem_[reset_vector_addr_ + 2] = 0x01;
+		//mem_[0x0102] = 'A';
+
+		// LDA_ABSX - no carry
+		//reg_.X = 0x80;
+		//mem_[reset_vector_addr_] = LDA_ABSX;
+		//mem_[reset_vector_addr_ + 1] = 0x02;
+		//mem_[reset_vector_addr_ + 2] = 0x01;
+		//mem_[0x0182] = 'A';
+
+		// LDA_ABSX - with carry
+		//reg_.X = 0xff;
+		//mem_[reset_vector_addr_] = LDA_ABSX;
+		//mem_[reset_vector_addr_ + 1] = 0x02;
+		//mem_[reset_vector_addr_ + 2] = 0x01;
+		//mem_[0x0201] = 'A';
+
+		// LDA_ABSy - no carry
+		reg_.Y = 0x80;
+		mem_[reset_vector_addr_] = LDA_ABSY;
+		mem_[reset_vector_addr_ + 1] = 0x02;
+		mem_[reset_vector_addr_ + 2] = 0x01;
+		mem_[0x0182] = 'A';
+
+		//// LDA_ABSX - with carry
+		//reg_.Y = 0xff;
+		//mem_[reset_vector_addr_] = LDA_ABSY;
+		//mem_[reset_vector_addr_ + 1] = 0x02;
+		//mem_[reset_vector_addr_ + 2] = 0x01;
+		//mem_[0x0201] = 'A';
 	}
 }

@@ -16,6 +16,9 @@ namespace eg::m6502
 		case LDA_IM: exec_LDA_IM_(); break;
 		case LDA_ZP: exec_LDA_ZP_(); break;
 		case LDA_ZPX: exec_LDA_ZPX_(); break;
+		case LDA_ABS: exec_LDA_ABS_(); break;
+		case LDA_ABSX: exec_LDA_ABSX_(); break;
+		case LDA_ABSY: exec_LDA_ABSY_(); break;
 		default:
 			break;
 		}
@@ -38,10 +41,25 @@ namespace eg::m6502
 	}
 
 	// Increments PC
-	auto m6502::read_mem_by_pc() -> byte
+	auto m6502::read_mem_by_bpc() -> byte
 	{
 		cycles_.simulate();
 		return mem_[reg_.PC++];
+	}
+
+	// Increments PC+2
+	auto m6502::read_mem_by_wpc() -> word
+	{
+		//cycles_.simulate();
+		const word value = mem_[reg_.PC] | (mem_[reg_.PC + 1] << 8);
+
+		++reg_.PC;
+		cycles_.simulate();
+
+		++reg_.PC;
+		cycles_.simulate();
+
+		return value;
 	}
 
 	// Increments PC
@@ -61,8 +79,8 @@ namespace eg::m6502
 	// LDA #10
 	auto m6502::exec_LDA_IM_() -> void
 	{
-		byte value = read_mem_by_pc();
-		exec_LDA_set_AZN(value);
+		byte value = read_mem_by_bpc();
+		exec_LDA_set_AZN_(value);
 	}
 
 	// LDA_ZP: Zero Page
@@ -80,9 +98,9 @@ namespace eg::m6502
 
 	auto m6502::exec_LDA_ZP_() -> void
 	{
-		const byte badd = read_mem_by_pc();
+		const byte badd = read_mem_by_bpc();
 		byte value = read_mem_by_badd(badd);
-		exec_LDA_set_AZN(value);
+		exec_LDA_set_AZN_(value);
 	}
 
 	// LDA_ZPX: Zero Page Indexed with X
@@ -100,14 +118,76 @@ namespace eg::m6502
 
 	auto m6502::exec_LDA_ZPX_() -> void
 	{
-		const byte badd = read_mem_by_pc() + reg_.X;
+		const byte badd = read_mem_by_bpc() + reg_.X;
 
-		cycles_.simulate(); // For adding X
+		// Why adding X to the base address requires 1 cycle?
+		// (per chatgpt) --
+		// Add the X register to the base address: This requires reading the base address, adding the value of X, and
+		// performing a modulo-256 operation to keep the result in the zero-page range.
+		// The addition and wrapping are handled in hardware and cost 1 cycle.
+		cycles_.simulate();
 		byte value = read_mem_by_badd(badd);
-		exec_LDA_set_AZN(value);
+		exec_LDA_set_AZN_(value);
 	}
 
-	auto m6502::exec_LDA_set_AZN(byte value) -> void
+	// LDA_ABS: Absolute
+	//
+	// Instructions using absolute addressing contain a full 16 bit address to identify the target location.
+
+	auto m6502::exec_LDA_ABS_() -> void
+	{
+		const word wadd = read_mem_by_wpc();
+		byte value = read_mem_by_wadd(wadd);
+		exec_LDA_set_AZN_(value);
+	}
+
+	// LDA_ABSX: Absolute Indexed with X
+	//
+	// The address to be accessed by an instruction using X register indexed absolute addressing is
+	// computed by taking the 16 bit address from the instruction and added the contents of the X register.
+	//
+	// For example if X contains $92 then an STA $2000,X instruction will store the accumulator
+	// at $2092 (e.g. $2000 + $92).
+
+	auto m6502::exec_LDA_ABSX_() -> void
+	{
+		// 1 cycle - ins
+		const word wadd = read_mem_by_wpc(); // 2 cycles for read_mem_by_wpc
+		const word wadd_x = wadd + reg_.X;
+
+		// 1 cycle - for cross page boundary
+		if ((wadd_x & 0xFF00) not_eq (wadd & 0xFF00))
+		{
+			cycles_.add(1);
+			cycles_.simulate();
+		}
+
+		byte value = read_mem_by_wadd(wadd_x); // 1
+		exec_LDA_set_AZN_(value);
+	}
+
+	// LDA_ABSY: Absolute Indexed with Y
+	//
+	// Same as LDA_ABSX but with Y register
+
+	auto m6502::exec_LDA_ABSY_() -> void
+	{
+		// 1 cycle - ins
+		const word wadd = read_mem_by_wpc(); // 2 cycles for read_mem_by_wpc
+		const word wadd_x = wadd + reg_.Y;
+
+		// 1 cycle - for cross page boundary
+		if ((wadd_x & 0xFF00) not_eq (wadd & 0xFF00))
+		{
+			cycles_.add(1);
+			cycles_.simulate();
+		}
+
+		byte value = read_mem_by_wadd(wadd_x); // 1
+		exec_LDA_set_AZN_(value);
+	}
+
+	auto m6502::exec_LDA_set_AZN_(byte value) -> void
 	{
 		reg_.AC = value;
 		reg_.SR.Z = (value == 0);

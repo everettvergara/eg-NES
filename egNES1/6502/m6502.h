@@ -26,7 +26,8 @@ namespace eg::m6502
 
 		auto read_mem_by_badd(byte address) -> byte;
 		auto read_mem_by_wadd(word address) -> byte;
-		auto read_mem_by_pc() -> byte;
+		auto read_mem_by_bpc() -> byte;
+		auto read_mem_by_wpc() -> word;
 		auto read_instruction() -> byte;
 
 	protected:
@@ -41,6 +42,9 @@ namespace eg::m6502
 		auto exec_LDA_IM_() -> void;
 		auto exec_LDA_ZP_() -> void;
 		auto exec_LDA_ZPX_() -> void;
-		auto exec_LDA_set_AZN(byte value) -> void;
+		auto exec_LDA_ABS_() -> void;
+		auto exec_LDA_ABSX_() -> void;
+		auto exec_LDA_ABSY_() -> void;
+		auto exec_LDA_set_AZN_(byte value) -> void;
 	};
 }

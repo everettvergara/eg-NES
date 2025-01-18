@@ -18,6 +18,7 @@ namespace eg::m6502
 		cycle() = default;
 
 		auto start_and_simulate(byte cycles) -> void;
+		auto add(byte cycles) -> void;
 		auto simulate() -> void;
 		auto is_zero() const -> bool;
 

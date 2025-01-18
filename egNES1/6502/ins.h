@@ -17,6 +17,9 @@ namespace eg::m6502
 	constexpr byte LDA_IM = 0xA9;
 	constexpr byte LDA_ZP = 0xA5;
 	constexpr byte LDA_ZPX = 0xB5;
+	constexpr byte LDA_ABS = 0xAD;
+	constexpr byte LDA_ABSX = 0xBD;
+	constexpr byte LDA_ABSY = 0xB9;
 
 	constexpr ins_attrib ins[256] =
 	{
@@ -193,7 +196,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xAA - 170
 		{ "-", "-", 0, 0 },		// 0xAB - 171
 		{ "-", "-", 0, 0 },		// 0xAC - 172
-		{ "-", "-", 0, 0 },		// 0xAD - 173
+		{ "LDA", "ABS", 3, 4 },		// 0xAD - 173
 		{ "-", "-", 0, 0 },		// 0xAE - 174
 		{ "-", "-", 0, 0 },		// 0xAF - 175
 		{ "-", "-", 0, 0 },		// 0xB0 - 176
@@ -205,11 +208,11 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xB6 - 182
 		{ "-", "-", 0, 0 },		// 0xB7 - 183
 		{ "-", "-", 0, 0 },		// 0xB8 - 184
-		{ "-", "-", 0, 0 },		// 0xB9 - 185
+		{ "LDA", "ABSY", 3, 4 },	// 0xB9 - 185
 		{ "-", "-", 0, 0 },		// 0xBA - 186
 		{ "-", "-", 0, 0 },		// 0xBB - 187
 		{ "-", "-", 0, 0 },		// 0xBC - 188
-		{ "-", "-", 0, 0 },		// 0xBD - 189
+		{ "LDA", "ABSX", 3, 4 },// 0xBD - 189
 		{ "-", "-", 0, 0 },		// 0xBE - 190
 		{ "-", "-", 0, 0 },		// 0xBF - 191
 		{ "-", "-", 0, 0 },		// 0xC0 - 192

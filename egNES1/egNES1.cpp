@@ -15,6 +15,6 @@ auto main(int, char* []) -> int
 
 	nes.reset();
 	nes.test_loader();
-	nes.execute();
+	nes.exec();
 	return 0;
 }

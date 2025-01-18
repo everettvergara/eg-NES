@@ -1,5 +1,2 @@
-﻿  m6502.cpp
-  m6502_generic.cpp
-  egNES1.cpp
-  Generating Code...
+﻿  m6502_generic.cpp
   egNES1.vcxproj -> D:\Codes\Projects\Personal\egNES1\egNES1\x64\Debug\egNES1.exe
