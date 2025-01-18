@@ -19,6 +19,7 @@ namespace eg::m6502
 		case LDA_ABS: exec_LDA_ABS_(); break;
 		case LDA_ABSX: exec_LDA_ABSX_(); break;
 		case LDA_ABSY: exec_LDA_ABSY_(); break;
+		case LDA_INDX: exec_LDA_INDX_(); break;
 		default:
 			break;
 		}
@@ -183,7 +184,31 @@ namespace eg::m6502
 			cycles_.simulate();
 		}
 
-		byte value = read_mem_by_wadd(wadd_x); // 1
+		const byte value = read_mem_by_wadd(wadd_x); // 1
+		exec_LDA_set_AZN_(value);
+	}
+
+	// LDA_INDX: Indirect Indexed with X
+	//
+	//
+
+	auto m6502::exec_LDA_INDX_() -> void
+	{
+		// 1 cycle - ins
+		const byte badd = read_mem_by_bpc() + reg_.X; // 1 cycle for read_mem_by_bpc
+
+		// Why adding X to the base address requires 1 cycle?
+		// (per chatgpt) --
+		// Add the X register to the base address: This requires reading the base address, adding the value of X, and
+		// performing a modulo-256 operation to keep the result in the zero-page range.
+		// The addition and wrapping are handled in hardware and cost 1 cycle.
+		cycles_.simulate();
+
+		const byte ladd = read_mem_by_badd(badd); // 1 cycle
+		const byte hadd = read_mem_by_badd(badd + 1); // 1 cycle
+		const word wadd = ladd | (hadd << 8);
+
+		const byte value = read_mem_by_wadd(wadd); // 1 cycle
 		exec_LDA_set_AZN_(value);
 	}
 

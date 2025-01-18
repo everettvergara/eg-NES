@@ -45,6 +45,7 @@ namespace eg::m6502
 		auto exec_LDA_ABS_() -> void;
 		auto exec_LDA_ABSX_() -> void;
 		auto exec_LDA_ABSY_() -> void;
+		auto exec_LDA_INDX_() -> void;
 		auto exec_LDA_set_AZN_(byte value) -> void;
 	};
 }

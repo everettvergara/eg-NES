@@ -72,11 +72,11 @@ namespace eg::m6502
 		//mem_[0x0201] = 'A';
 
 		// LDA_ABSy - no carry
-		reg_.Y = 0x80;
-		mem_[reset_vector_addr_] = LDA_ABSY;
-		mem_[reset_vector_addr_ + 1] = 0x02;
-		mem_[reset_vector_addr_ + 2] = 0x01;
-		mem_[0x0182] = 'A';
+		//reg_.Y = 0x80;
+		//mem_[reset_vector_addr_] = LDA_ABSY;
+		//mem_[reset_vector_addr_ + 1] = 0x02;
+		//mem_[reset_vector_addr_ + 2] = 0x01;
+		//mem_[0x0182] = 'A';
 
 		//// LDA_ABSX - with carry
 		//reg_.Y = 0xff;
@@ -84,5 +84,13 @@ namespace eg::m6502
 		//mem_[reset_vector_addr_ + 1] = 0x02;
 		//mem_[reset_vector_addr_ + 2] = 0x01;
 		//mem_[0x0201] = 'A';
+
+		// LDA_INDX
+		reg_.X = 0x80;
+		mem_[reset_vector_addr_] = LDA_INDX;
+		mem_[reset_vector_addr_ + 1] = 0x0f;
+		mem_[0x008f] = 0x02;
+		mem_[0x0090] = 0x01;
+		mem_[0x0102] = 'A';
 	}
 }
