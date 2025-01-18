@@ -21,6 +21,7 @@ namespace eg::m6502
 	constexpr byte LDA_ABSX = 0xBD;
 	constexpr byte LDA_ABSY = 0xB9;
 	constexpr byte LDA_INDX = 0xA1;
+	constexpr byte LDA_INDY = 0xB1;
 
 	constexpr ins_attrib ins[256] =
 	{
@@ -201,7 +202,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xAE - 174
 		{ "-", "-", 0, 0 },		// 0xAF - 175
 		{ "-", "-", 0, 0 },		// 0xB0 - 176
-		{ "-", "-", 0, 0 },		// 0xB1 - 177
+		{ "LDA", "INDY", 2, 5 },		// 0xB1 - 177
 		{ "-", "-", 0, 0 },		// 0xB2 - 178
 		{ "-", "-", 0, 0 },		// 0xB3 - 179
 		{ "-", "-", 0, 0 },		// 0xB4 - 180

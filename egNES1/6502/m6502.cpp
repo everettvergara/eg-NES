@@ -20,6 +20,7 @@ namespace eg::m6502
 		case LDA_ABSX: exec_LDA_ABSX_(); break;
 		case LDA_ABSY: exec_LDA_ABSY_(); break;
 		case LDA_INDX: exec_LDA_INDX_(); break;
+		case LDA_INDY: exec_LDA_INDY_(); break;
 		default:
 			break;
 		}
@@ -209,6 +210,26 @@ namespace eg::m6502
 		const word wadd = ladd | (hadd << 8);
 
 		const byte value = read_mem_by_wadd(wadd); // 1 cycle
+		exec_LDA_set_AZN_(value);
+	}
+
+	auto m6502::exec_LDA_INDY_() -> void
+	{
+		// 1 cycle - ins
+		const byte badd = read_mem_by_bpc(); // 1 cycle for read_mem_by_bpc
+
+		const byte ladd = read_mem_by_badd(badd); // 1 cycle
+		const byte hadd = read_mem_by_badd(badd + 1); // 1 cycle
+		const word wadd = ladd | (hadd << 8);
+		const word wadd_y = wadd + reg_.Y;
+
+		if ((wadd_y & 0xFF00) not_eq (wadd & 0xFF00))
+		{
+			cycles_.add(1);
+			cycles_.simulate();
+		}
+
+		const byte value = read_mem_by_wadd(wadd_y); // 1 cycle
 		exec_LDA_set_AZN_(value);
 	}
 
