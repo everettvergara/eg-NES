@@ -22,8 +22,8 @@ namespace eg::m6502
 		//mem_[0xfffc] = LDA_IM;
 		//mem_[0xfffd] = 'A';
 
-		mem_[0xfffc] = LDA_IM;
-		mem_[0xfffd] = -20;
+		//mem_[0xfffc] = LDA_IM;
+		//mem_[0xfffd] = -20;
 
 		//mem_[0xfffc] = LDA_IM;
 		//mem_[0xfffd] = 0;
@@ -42,5 +42,11 @@ namespace eg::m6502
 		//mem_[0xfffc] = LDA_ZP;
 		//mem_[0xfffd] = 0x00;
 		//mem_[0x0000] = 0;
+
+		// LDA_ZPX
+		reg_.X = 0x80;
+		mem_[reset_vector_addr_] = LDA_ZPX;
+		mem_[reset_vector_addr_ + 1] = 0x0f;
+		mem_[0x008f] = 'A';
 	}
 }

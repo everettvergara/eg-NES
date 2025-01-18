@@ -22,7 +22,7 @@ namespace eg::m6502
 		virtual ~m6502() = default;
 		virtual auto reset() -> void = 0;
 
-		auto execute() -> void;
+		auto exec() -> void;
 
 		auto read_mem_by_badd(byte address) -> byte;
 		auto read_mem_by_wadd(word address) -> byte;
@@ -40,6 +40,7 @@ namespace eg::m6502
 
 		auto exec_LDA_IM_() -> void;
 		auto exec_LDA_ZP_() -> void;
+		auto exec_LDA_ZPX_() -> void;
 		auto exec_LDA_set_AZN(byte value) -> void;
 	};
 }

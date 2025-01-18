@@ -9,12 +9,13 @@ namespace eg::m6502
 	{
 	}
 
-	auto m6502::execute() -> void
+	auto m6502::exec() -> void
 	{
 		switch (const auto op_code = read_instruction(); op_code)
 		{
 		case LDA_IM: exec_LDA_IM_(); break;
 		case LDA_ZP: exec_LDA_ZP_(); break;
+		case LDA_ZPX: exec_LDA_ZPX_(); break;
 		default:
 			break;
 		}
@@ -22,24 +23,28 @@ namespace eg::m6502
 		assert(cycles_.is_zero());
 	}
 
+	// DOES NOT increments PC
 	auto m6502::read_mem_by_badd(byte address) -> byte
 	{
 		cycles_.simulate();
 		return mem_[address];
 	}
 
+	// DOES NOT increments PC
 	auto m6502::read_mem_by_wadd(word address) -> byte
 	{
 		cycles_.simulate();
 		return mem_[address];
 	}
 
+	// Increments PC
 	auto m6502::read_mem_by_pc() -> byte
 	{
 		cycles_.simulate();
 		return mem_[reg_.PC++];
 	}
 
+	// Increments PC
 	auto m6502::read_instruction() -> byte
 	{
 		const byte op_code = mem_[reg_.PC++];
@@ -76,6 +81,28 @@ namespace eg::m6502
 	auto m6502::exec_LDA_ZP_() -> void
 	{
 		const byte badd = read_mem_by_pc();
+		byte value = read_mem_by_badd(badd);
+		exec_LDA_set_AZN(value);
+	}
+
+	// LDA_ZPX: Zero Page Indexed with X
+	//
+	// The address to be accessed by an instruction using indexed zero page addressing is calculated
+	// by taking the 8 bit zero page address from the instruction and adding the current value of the X register
+	// to it.
+	//
+	// For example if the X register contains $0F and the instruction LDA $80,X is executed then the accumulator
+	// will be loaded from $008F (e.g. $80 + $0F => $8F).
+	//
+	// The address calculation wraps around if the sum of the base address and the register exceed $FF.
+	// If we repeat the last example but with $FF in the X register then the accumulator will be
+	// loaded from $007F(e.g.$80 + $FF = > $7F) and not $017F.
+
+	auto m6502::exec_LDA_ZPX_() -> void
+	{
+		const byte badd = read_mem_by_pc() + reg_.X;
+
+		cycles_.simulate(); // For adding X
 		byte value = read_mem_by_badd(badd);
 		exec_LDA_set_AZN(value);
 	}
