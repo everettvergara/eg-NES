@@ -1,9 +1,13 @@
 # eg-NES
-Another 6502 NES written in Modern C++
+Another 6502 NES Emulator written in Modern C++
 
 **Version:** 0.001
 
 ---
+
+## 2025-01-19:
+### Reorg Files and Added CMake
+
 
 ## 2025-01-18:
 ### LDA Addressing Modes:
