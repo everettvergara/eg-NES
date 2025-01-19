@@ -1,3 +1,5 @@
+#include "m6502.h"
+#include "m6502.h"
 #include <cassert>
 #include "m6502.h"
 
@@ -72,6 +74,16 @@ namespace eg::m6502
 
 		cycles_.start_and_simulate(ins[op_code].cycles);
 		return op_code;
+	}
+
+	auto m6502::load_mem(mem t) -> void
+	{
+		mem_ = std::move(t);
+	}
+
+	auto m6502::get_reg() const -> const reg&
+	{
+		return reg_;
 	}
 
 	// LDA_IM: Immediate

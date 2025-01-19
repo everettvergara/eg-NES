@@ -4,18 +4,18 @@
 // https://www.nesdev.org/obelisk-6502-guide/reference.html#LDA
 // https://github.com/catchorg/Catch2
 
-#include <iostream>
-#include "m6502_generic.h"
+//#include <iostream>
+#define CATCH_CONFIG_MAIN
+#include <catch.hpp>
+#include "m6502_ins_lda.h"
 
-auto main(int, char* []) -> int
-{
-	using namespace eg;
 
-	m6502::m6502_generic nes(0xfffc, 0x0000);
-
-	nes.reset();
-	nes.test_loader();
-	nes.exec();
-
-	return 0;
+TEST_CASE("m6502 Instructions:")
+{ 
+	SECTION("LDA")
+	{
+		REQUIRE(eg::m6502::test_LDA_IM_nzero_nneg());
+		REQUIRE(eg::m6502::test_LDA_IM_zero_nneg());
+		REQUIRE(eg::m6502::test_LDA_IM_nzero_nneg());
+	}
 }

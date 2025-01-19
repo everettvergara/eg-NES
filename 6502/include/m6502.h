@@ -29,6 +29,9 @@ namespace eg::m6502
 		auto read_mem_by_bpc() -> byte;
 		auto read_mem_by_wpc() -> word;
 		auto read_instruction() -> byte;
+		auto load_mem(mem data) -> void;
+
+		auto get_reg() const->const reg &;
 
 	protected:
 

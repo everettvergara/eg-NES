@@ -15,9 +15,19 @@ target_include_directories(eg6502 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 # Test eg6502.lib
 # --
-add_executable (eg6502_run_test "eg6502_run_test.cpp")
-target_link_libraries(eg6502_run_test PRIVATE eg6502)
-target_include_directories(eg6502_run_test PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+find_package(Catch2 REQUIRED)
+
+add_executable (eg6502_run_test 
+	"eg6502_run_test.cpp"
+	"test/src/m6502_ins_lda.cpp")
+
+target_link_libraries(eg6502_run_test PRIVATE 
+	eg6502 
+	Catch2::Catch2WithMain)
+
+target_include_directories(eg6502_run_test PUBLIC 
+	"${CMAKE_CURRENT_SOURCE_DIR}/include" 
+	"${CMAKE_CURRENT_SOURCE_DIR}/test/include")
 
 
 # Set C++20
