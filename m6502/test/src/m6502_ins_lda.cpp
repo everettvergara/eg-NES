@@ -1,5 +1,5 @@
 #include "m6502_ins_lda.h"
-#include "m6502_generic.h"
+#include "m6502_tester.h"
 
 namespace eg::m6502
 {

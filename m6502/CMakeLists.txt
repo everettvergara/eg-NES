@@ -7,7 +7,6 @@ add_library(eg_m6502 STATIC
 	"src/cycle.cpp"
 	"src/mem.cpp"
 	"src/m6502.cpp"
-	"src/m6502_generic.cpp"
 	"src/reg.cpp"
 	"src/sr.cpp")
 target_include_directories(eg_m6502 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
@@ -19,7 +18,8 @@ find_package(Catch2 REQUIRED)
 
 add_executable (eg_m6502_run_test 
 	"m6502_run_test.cpp"
-	"test/src/m6502_ins_lda.cpp")
+	"test/src/m6502_ins_lda.cpp"
+	"test/src/m6502_tester.cpp")
 
 target_link_libraries(eg_m6502_run_test PRIVATE 
 	eg_m6502 

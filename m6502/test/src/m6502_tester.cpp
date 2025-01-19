@@ -1,4 +1,4 @@
-#include "m6502_generic.h"
+#include "m6502_tester.h"
 #include <cstdlib>
 
 namespace eg::m6502
@@ -10,7 +10,7 @@ namespace eg::m6502
 
 	auto m6502_generic::reset() -> void
 	{
-		// Add iterator for mem
+		// Garble memory
 		for (auto& m : mem_)
 		{
 			m = rand();
