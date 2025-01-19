@@ -25,20 +25,6 @@ namespace eg::m6502
 	}
 	auto m6502_generic::test_loader() -> void
 	{
-		// LDA_ZPX
-		//reg_.X = 0x80;
-		//mem_[reset_vector_addr_] = LDA_ZPX;
-		//mem_[reset_vector_addr_ + 1] = 0x0f;
-		//mem_[0x008f] = 'A';
-
-		// LDA_ABS
-		//mem_[reset_vector_addr_] = LDA_ABS;
-
-		//// value: 257
-		//mem_[reset_vector_addr_ + 1] = 0x02;
-		//mem_[reset_vector_addr_ + 2] = 0x01;
-		//mem_[0x0102] = 'A';
-
 		// LDA_ABSX - no carry
 		//reg_.X = 0x80;
 		//mem_[reset_vector_addr_] = LDA_ABSX;

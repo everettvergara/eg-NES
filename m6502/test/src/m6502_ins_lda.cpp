@@ -233,4 +233,87 @@ namespace eg::m6502
 
 		return false;
 	}
+
+	auto test_LDA_ABS_nzero_nneg() -> bool
+	{
+		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+
+		cpu.reset();
+
+		mem data;
+
+		data[RESET_VECTOR_ADDRESS] = LDA_ABS;
+		data[RESET_VECTOR_ADDRESS + 1] = 0x02;
+		data[RESET_VECTOR_ADDRESS + 2] = 0x01;
+		data[0x0102] = 'A';
+
+		cpu.test_load_mem(std::move(data));
+		cpu.exec();
+
+		if (const reg t = cpu.get_reg();
+
+			t.AC == 'A' and
+			t.SR.Z == 0 and
+			t.SR.N == 0)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	auto test_LDA_ABS_zero_nneg() -> bool
+	{
+		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+
+		cpu.reset();
+
+		mem data;
+
+		data[RESET_VECTOR_ADDRESS] = LDA_ABS;
+		data[RESET_VECTOR_ADDRESS + 1] = 0x02;
+		data[RESET_VECTOR_ADDRESS + 2] = 0x01;
+		data[0x0102] = 0;
+
+		cpu.test_load_mem(std::move(data));
+
+		cpu.exec();
+
+		if (const reg t = cpu.get_reg();
+
+			t.AC == 0 and
+			t.SR.Z == 1 and
+			t.SR.N == 0)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	auto test_LDA_ABS_nzero_neg() -> bool
+	{
+		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+		cpu.reset();
+
+		mem data;
+
+		data[RESET_VECTOR_ADDRESS] = LDA_ABS;
+		data[RESET_VECTOR_ADDRESS + 1] = 0x02;
+		data[RESET_VECTOR_ADDRESS + 2] = 0x01;
+		data[0x0102] = 235;
+
+		cpu.test_load_mem(std::move(data));
+		cpu.exec();
+
+		if (const reg t = cpu.get_reg();
+			t.AC == 235 and
+			t.SR.Z == 0 and
+			t.SR.N == 1)
+		{
+			return true;
+		}
+
+		return false;
+	}
 }
