@@ -23,22 +23,14 @@ namespace eg::m6502
 	{
 		reg_.X = X;
 	}
+
+	auto m6502_generic::test_load_reg_Y(byte Y) -> void
+	{
+		reg_.Y = Y;
+	}
+
 	auto m6502_generic::test_loader() -> void
 	{
-		// LDA_ABSX - no carry
-		//reg_.X = 0x80;
-		//mem_[reset_vector_addr_] = LDA_ABSX;
-		//mem_[reset_vector_addr_ + 1] = 0x02;
-		//mem_[reset_vector_addr_ + 2] = 0x01;
-		//mem_[0x0182] = 'A';
-
-		// LDA_ABSX - with carry
-		//reg_.X = 0xff;
-		//mem_[reset_vector_addr_] = LDA_ABSX;
-		//mem_[reset_vector_addr_ + 1] = 0x02;
-		//mem_[reset_vector_addr_ + 2] = 0x01;
-		//mem_[0x0201] = 'A';
-
 		// LDA_ABSy - no carry
 		//reg_.Y = 0x80;
 		//mem_[reset_vector_addr_] = LDA_ABSY;

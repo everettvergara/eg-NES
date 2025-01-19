@@ -29,5 +29,19 @@ TEST_CASE("m6502 Instructions:")
 		REQUIRE_NOTHROW(test_LDA_ABS_nzero_nneg());
 		REQUIRE_NOTHROW(test_LDA_ABS_zero_nneg());
 		REQUIRE_NOTHROW(test_LDA_ABS_nzero_neg());
+
+		REQUIRE_NOTHROW(test_LDA_ABSX_nzero_nneg_ncarry());
+		REQUIRE_NOTHROW(test_LDA_ABSX_zero_nneg_ncarry());
+		REQUIRE_NOTHROW(test_LDA_ABSX_nzero_neg_ncarry());
+		REQUIRE_NOTHROW(test_LDA_ABSX_nzero_nneg_carry());
+		REQUIRE_NOTHROW(test_LDA_ABSX_zero_nneg_carry());
+		REQUIRE_NOTHROW(test_LDA_ABSX_nzero_neg_carry());
+
+		REQUIRE_NOTHROW(test_LDA_ABSY_nzero_nneg_ncarry());
+		REQUIRE_NOTHROW(test_LDA_ABSY_zero_nneg_ncarry());
+		REQUIRE_NOTHROW(test_LDA_ABSY_nzero_neg_ncarry());
+		REQUIRE_NOTHROW(test_LDA_ABSY_nzero_nneg_carry());
+		REQUIRE_NOTHROW(test_LDA_ABSY_zero_nneg_carry());
+		REQUIRE_NOTHROW(test_LDA_ABSY_nzero_neg_carry());
 	}
 }

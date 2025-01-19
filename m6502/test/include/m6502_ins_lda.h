@@ -14,6 +14,8 @@ namespace eg::m6502
 	auto test_LDA_ZP(byte val) -> bool;
 	auto test_LDA_ZPX(byte val) -> bool;
 	auto test_LDA_ABS(byte val) -> bool;
+	auto test_LDA_ABSX(byte val, byte X) -> bool;
+	auto test_LDA_ABSY(byte val, byte Y) -> bool;
 
 	auto test_LDA_IM_nzero_nneg() -> bool;
 	auto test_LDA_IM_zero_nneg() -> bool;
@@ -27,4 +29,18 @@ namespace eg::m6502
 	auto test_LDA_ABS_nzero_nneg() -> bool;
 	auto test_LDA_ABS_zero_nneg() -> bool;
 	auto test_LDA_ABS_nzero_neg() -> bool;
+
+	auto test_LDA_ABSX_nzero_nneg_ncarry() -> bool;
+	auto test_LDA_ABSX_zero_nneg_ncarry() -> bool;
+	auto test_LDA_ABSX_nzero_neg_ncarry() -> bool;
+	auto test_LDA_ABSX_nzero_nneg_carry() -> bool;
+	auto test_LDA_ABSX_zero_nneg_carry() -> bool;
+	auto test_LDA_ABSX_nzero_neg_carry() -> bool;
+
+	auto test_LDA_ABSY_nzero_nneg_ncarry() -> bool;
+	auto test_LDA_ABSY_zero_nneg_ncarry() -> bool;
+	auto test_LDA_ABSY_nzero_neg_ncarry() -> bool;
+	auto test_LDA_ABSY_nzero_nneg_carry() -> bool;
+	auto test_LDA_ABSY_zero_nneg_carry() -> bool;
+	auto test_LDA_ABSY_nzero_neg_carry() -> bool;
 }

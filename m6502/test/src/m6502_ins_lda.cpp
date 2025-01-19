@@ -81,6 +81,54 @@ namespace eg::m6502
 		return test_LDA_reg_check(cpu.get_reg(), val);
 	}
 
+	auto test_LDA_ABSX(byte val, byte X) -> bool
+	{
+		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+
+		cpu.reset();
+
+		mem data;
+
+		data[RESET_VECTOR_ADDRESS] = LDA_ABSX;
+		data[RESET_VECTOR_ADDRESS + 1] = 0x02;
+		data[RESET_VECTOR_ADDRESS + 2] = 0x01;
+
+		byte baddr = (0x01 + X);		// truncate to byte
+		word waddr = 0x0100 + baddr;
+
+		data[waddr] = val;
+
+		cpu.test_load_mem(std::move(data));
+		cpu.test_load_reg_X(X);
+		cpu.exec();
+
+		return test_LDA_reg_check(cpu.get_reg(), val);
+	}
+
+	auto test_LDA_ABSY(byte val, byte Y) -> bool
+	{
+		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+
+		cpu.reset();
+
+		mem data;
+
+		data[RESET_VECTOR_ADDRESS] = LDA_ABSX;
+		data[RESET_VECTOR_ADDRESS + 1] = 0x02;
+		data[RESET_VECTOR_ADDRESS + 2] = 0x01;
+
+		byte baddr = (0x01 + Y);		// truncate to byte
+		word waddr = 0x0100 + baddr;
+
+		data[waddr] = val;
+
+		cpu.test_load_mem(std::move(data));
+		cpu.test_load_reg_Y(Y);
+		cpu.exec();
+
+		return test_LDA_reg_check(cpu.get_reg(), val);
+	}
+
 	auto test_LDA_IM_nzero_nneg() -> bool { return test_LDA_IM('A'); }
 	auto test_LDA_IM_zero_nneg() -> bool { return test_LDA_IM(0); }
 	auto test_LDA_IM_nzero_neg() -> bool { return test_LDA_IM(235); }
@@ -93,4 +141,16 @@ namespace eg::m6502
 	auto test_LDA_ABS_nzero_nneg() -> bool { return test_LDA_ABS('A'); }
 	auto test_LDA_ABS_zero_nneg() -> bool { return test_LDA_ABS(0); }
 	auto test_LDA_ABS_nzero_neg() -> bool { return test_LDA_ABS(235); }
+	auto test_LDA_ABSX_nzero_nneg_ncarry() -> bool { return test_LDA_ABSX('A', 0x80); }
+	auto test_LDA_ABSX_zero_nneg_ncarry() -> bool { return test_LDA_ABSX(0, 0x80); }
+	auto test_LDA_ABSX_nzero_neg_ncarry() -> bool { return test_LDA_ABSX(235, 0x80); }
+	auto test_LDA_ABSX_nzero_nneg_carry() -> bool { return test_LDA_ABSX('A', 0xff); }
+	auto test_LDA_ABSX_zero_nneg_carry() -> bool { return test_LDA_ABSX(0, 0xff); }
+	auto test_LDA_ABSX_nzero_neg_carry() -> bool { return test_LDA_ABSX(235, 0xff); }
+	auto test_LDA_ABSY_nzero_nneg_ncarry() -> bool { return test_LDA_ABSY('A', 0x80); }
+	auto test_LDA_ABSY_zero_nneg_ncarry() -> bool { return test_LDA_ABSY(0, 0x80); }
+	auto test_LDA_ABSY_nzero_neg_ncarry() -> bool { return test_LDA_ABSY(235, 0x80); }
+	auto test_LDA_ABSY_nzero_nneg_carry() -> bool { return test_LDA_ABSY('A', 0xff); }
+	auto test_LDA_ABSY_zero_nneg_carry() -> bool { return test_LDA_ABSY(0, 0xff); }
+	auto test_LDA_ABSY_nzero_neg_carry() -> bool { return test_LDA_ABSY(235, 0xff); }
 }

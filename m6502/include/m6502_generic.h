@@ -14,5 +14,6 @@ namespace eg::m6502
 		auto test_loader() -> void;
 		auto test_load_mem(mem m) -> void;
 		auto test_load_reg_X(byte X) -> void;
+		auto test_load_reg_Y(byte Y) -> void;
 	};
 }
