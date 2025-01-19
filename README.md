@@ -1,5 +1,5 @@
-# egNES1
-Another 65xx NES written in Modern C++
+# eg-NES
+Another 6502 NES written in Modern C++
 
 **Version:** 0.001
 
