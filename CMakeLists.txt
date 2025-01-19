@@ -12,4 +12,4 @@ endif()
 project ("eg-Nes")
 
 # Include sub-projects.
-add_subdirectory ("6502")
+add_subdirectory ("m6502")

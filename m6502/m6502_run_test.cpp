@@ -17,5 +17,9 @@ TEST_CASE("m6502 Instructions:")
 		REQUIRE(eg::m6502::test_LDA_IM_nzero_nneg());
 		REQUIRE(eg::m6502::test_LDA_IM_zero_nneg());
 		REQUIRE(eg::m6502::test_LDA_IM_nzero_nneg());
+
+		REQUIRE(eg::m6502::test_LDA_ZP_nzero_nneg());
+		REQUIRE(eg::m6502::test_LDA_ZP_zero_nneg());
+		REQUIRE(eg::m6502::test_LDA_ZP_nzero_neg());
 	}
 }

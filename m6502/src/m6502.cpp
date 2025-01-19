@@ -91,6 +91,7 @@ namespace eg::m6502
 	// Immediate addressing allows the programmer to directly specify an 8 bit constant within the instruction.
 	// It is indicated by a '#' symbol followed by an numeric expression. For example:
 	// LDA #10
+
 	auto m6502::exec_LDA_IM_() -> void
 	{
 		byte value = read_mem_by_bpc();
