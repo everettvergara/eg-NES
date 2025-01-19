@@ -24,7 +24,6 @@ namespace eg::m6502
 	auto test_LDA_ZPX_nzero_nneg() -> bool;
 	auto test_LDA_ZPX_zero_nneg() -> bool;
 	auto test_LDA_ZPX_nzero_neg() -> bool;
-
 	auto test_LDA_ABS_nzero_nneg() -> bool;
 	auto test_LDA_ABS_zero_nneg() -> bool;
 	auto test_LDA_ABS_nzero_neg() -> bool;
