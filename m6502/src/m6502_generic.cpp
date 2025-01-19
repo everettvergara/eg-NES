@@ -16,22 +16,6 @@ namespace eg::m6502
 
 	auto m6502_generic::test_loader() -> void
 	{
-
-		// LDA_ZP
-		// --
-
-		//mem_[0xfffc] = LDA_ZP;
-		//mem_[0xfffd] = 0x00;
-		//mem_[0x0000] = 'A';
-
-		//mem_[0xfffc] = LDA_ZP;
-		//mem_[0xfffd] = 0x00;
-		//mem_[0x0000] = -20;
-
-		//mem_[0xfffc] = LDA_ZP;
-		//mem_[0xfffd] = 0x00;
-		//mem_[0x0000] = 0;
-
 		// LDA_ZPX
 		//reg_.X = 0x80;
 		//mem_[reset_vector_addr_] = LDA_ZPX;
