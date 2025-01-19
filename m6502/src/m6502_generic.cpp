@@ -14,6 +14,15 @@ namespace eg::m6502
 		reg_.PC = reset_vector_addr_;
 	}
 
+	auto m6502_generic::test_load_mem(mem m) -> void
+	{
+		mem_ = std::move(m);
+	}
+
+	auto m6502_generic::test_load_reg_X(byte X) -> void
+	{
+		reg_.X = X;
+	}
 	auto m6502_generic::test_loader() -> void
 	{
 		// LDA_ZPX

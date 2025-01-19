@@ -12,5 +12,7 @@ namespace eg::m6502
 		auto reset() -> void final;
 
 		auto test_loader() -> void;
+		auto test_load_mem(mem m) -> void;
+		auto test_load_reg_X(byte X) -> void;
 	};
 }

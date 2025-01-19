@@ -76,16 +76,6 @@ namespace eg::m6502
 		return op_code;
 	}
 
-	auto m6502::load_mem(mem m) -> void
-	{
-		mem_ = std::move(m);
-	}
-
-	auto m6502::load_reg_X(byte X) -> void
-	{
-		reg_.X = X;
-	}
-
 	auto m6502::get_reg() const -> const reg&
 	{
 		return reg_;

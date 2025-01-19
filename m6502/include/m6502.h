@@ -30,10 +30,6 @@ namespace eg::m6502
 		auto read_mem_by_wpc() -> word;
 		auto read_instruction() -> byte;
 
-		// should be protected, so a cpu_test can derived this class and use it.
-		auto load_mem(mem m) -> void;
-		auto load_reg_X(byte X) -> void;
-
 		auto get_reg() const->const reg&;
 
 	protected:

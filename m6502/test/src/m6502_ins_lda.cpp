@@ -13,7 +13,7 @@ namespace eg::m6502
 		data[RESET_VECTOR_ADDRESS] = LDA_IM;
 		data[RESET_VECTOR_ADDRESS + 1] = 'A';
 
-		cpu.load_mem(std::move(data));
+		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 
 		if (const reg t = cpu.get_reg();
@@ -38,7 +38,7 @@ namespace eg::m6502
 		data[RESET_VECTOR_ADDRESS] = LDA_IM;
 		data[RESET_VECTOR_ADDRESS + 1] = 0;
 
-		cpu.load_mem(std::move(data));
+		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 
 		if (const reg t = cpu.get_reg();
@@ -62,7 +62,7 @@ namespace eg::m6502
 		data[RESET_VECTOR_ADDRESS] = LDA_IM;
 		data[RESET_VECTOR_ADDRESS + 1] = 235;
 
-		cpu.load_mem(std::move(data));
+		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 
 		if (const reg t = cpu.get_reg();
@@ -87,7 +87,7 @@ namespace eg::m6502
 		data[RESET_VECTOR_ADDRESS + 1] = 0x05;
 		data[0x0005] = 'A';
 
-		cpu.load_mem(std::move(data));
+		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 
 		if (const reg t = cpu.get_reg();
@@ -113,7 +113,7 @@ namespace eg::m6502
 		data[RESET_VECTOR_ADDRESS + 1] = 0x05;
 		data[0x0005] = 0;
 
-		cpu.load_mem(std::move(data));
+		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 
 		if (const reg t = cpu.get_reg();
@@ -138,7 +138,7 @@ namespace eg::m6502
 		data[RESET_VECTOR_ADDRESS + 1] = 0x05;
 		data[0x0005] = 235;
 
-		cpu.load_mem(std::move(data));
+		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 
 		if (const reg t = cpu.get_reg();
@@ -164,8 +164,8 @@ namespace eg::m6502
 		data[RESET_VECTOR_ADDRESS + 1] = 0x05;
 		data[0x00f5] = 'A';
 
-		cpu.load_mem(std::move(data));
-		cpu.load_reg_X(0xf0);
+		cpu.test_load_mem(std::move(data));
+		cpu.test_load_reg_X(0xf0);
 		cpu.exec();
 
 		if (const reg t = cpu.get_reg();
@@ -192,8 +192,8 @@ namespace eg::m6502
 		data[RESET_VECTOR_ADDRESS + 1] = 0x05;
 		data[0x00f5] = 0;
 
-		cpu.load_mem(std::move(data));
-		cpu.load_reg_X(0xf0);
+		cpu.test_load_mem(std::move(data));
+		cpu.test_load_reg_X(0xf0);
 		cpu.exec();
 
 		if (const reg t = cpu.get_reg();
@@ -213,15 +213,14 @@ namespace eg::m6502
 		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
 		cpu.reset();
 
-		const reg r{ .X = 0xf0 };
 		mem data;
 
 		data[RESET_VECTOR_ADDRESS] = LDA_ZPX;
 		data[RESET_VECTOR_ADDRESS + 1] = 0x05;
 		data[0x00f5] = 235;
 
-		cpu.load_mem(std::move(data));
-		cpu.load_reg_X(0xf0);
+		cpu.test_load_mem(std::move(data));
+		cpu.test_load_reg_X(0xf0);
 		cpu.exec();
 
 		if (const reg t = cpu.get_reg();
