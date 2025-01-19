@@ -1,0 +1,28 @@
+﻿
+project(eg6502)
+
+# Libs
+# --
+add_library(eg6502 STATIC
+	"src/cycle.cpp"
+	"src/mem.cpp"
+	"src/m6502.cpp"
+	"src/m6502_generic.cpp"
+	"src/reg.cpp"
+	"src/sr.cpp")
+target_include_directories(eg6502 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+
+# Test eg6502.lib
+# --
+add_executable (eg6502_run_test "eg6502_run_test.cpp")
+target_link_libraries(eg6502_run_test PRIVATE eg6502)
+target_include_directories(eg6502_run_test PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+
+# Set C++20
+# --
+if (CMAKE_VERSION VERSION_GREATER 3.12)
+  set_property(TARGET eg6502 PROPERTY CXX_STANDARD 20)
+  set_property(TARGET eg6502_run_test PROPERTY CXX_STANDARD 20)
+endif()
