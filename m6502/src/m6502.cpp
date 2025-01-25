@@ -84,13 +84,22 @@ namespace eg::m6502
 	// LDA_IM: Immediate
 	//
 	// Immediate addressing allows the programmer to directly specify an 8 bit constant within the instruction.
-	// It is indicated by a '#' symbol followed by an numeric expression. For example:
-	// LDA #10
+	//
+	// Operation:
+	// 0xfffc: {LDA_IM}
+	// 0xfffd: 'A'
+	//
+	// exec();
+	// reg_.PC = 0xfffe
+	// reg_.AC = 'A'
+	// reg_.Z = 1, if AC == 0 else 0
+	// reg_.N = 1, if |AC| > 127 else 0
 
 	auto m6502::exec_LDA_IM_() -> void
 	{
 		byte value = read_mem_by_bpc();
-		exec_LDA_set_AZN_(value);
+		reg_.AC = value;
+		exec_LD_set_ZN_(value);
 	}
 
 	// LDA_ZP: Zero Page
@@ -105,12 +114,25 @@ namespace eg::m6502
 	//
 	// An assembler will automatically select zero page addressing mode if the operand evaluates
 	// to a zero page address and the instruction supports the mode(not all do).
+	//
+	// Operation:
+	//
+	// 0x0005: 'A' <-------+
+	// ...                 |
+	// 0xfffc: {LDA_ZP}    |
+	// 0xfffd: 0x05 -------+
+	//
+	// reg_.PC = 0xfffe
+	// reg_.AC = 'A'
+	// reg_.Z = 1, if AC == 0 else 0
+	// reg_.N = 1, if |AC| > 127 else 0
 
 	auto m6502::exec_LDA_ZP_() -> void
 	{
 		const byte badd = read_mem_by_bpc();
 		byte value = read_mem_by_badd(badd);
-		exec_LDA_set_AZN_(value);
+		reg_.AC = value;
+		exec_LD_set_ZN_(value);
 	}
 
 	// LDA_ZPX: Zero Page Indexed with X
@@ -125,6 +147,17 @@ namespace eg::m6502
 	// The address calculation wraps around if the sum of the base address and the register exceed $FF.
 	// If we repeat the last example but with $FF in the X register then the accumulator will be
 	// loaded from $007F(e.g.$80 + $FF = > $7F) and not $017F.
+	//
+	// Operation:
+	// 0x0085: 'A' <--------------------------------------------+
+	// ...                                                      |
+	// 0xfffc: {LDA_ZPX}                                        |
+	// 0xfffd: 0x05 -------> + reg_.X (0x80) & 0x00ff = 0x85 ---+
+	//
+	// reg_.PC = 0xfffe
+	// reg_.AC = 'A'
+	// reg_.Z = 1, if AC == 0 else 0
+	// reg_.N = 1, if |AC| > 127 else 0
 
 	auto m6502::exec_LDA_ZPX_() -> void
 	{
@@ -135,20 +168,35 @@ namespace eg::m6502
 		// Add the X register to the base address: This requires reading the base address, adding the value of X, and
 		// performing a modulo-256 operation to keep the result in the zero-page range.
 		// The addition and wrapping are handled in hardware and cost 1 cycle.
+
 		cycles_.simulate();
 		byte value = read_mem_by_badd(badd);
-		exec_LDA_set_AZN_(value);
+		reg_.AC = value;
+		exec_LD_set_ZN_(value);
 	}
 
 	// LDA_ABS: Absolute
 	//
 	// Instructions using absolute addressing contain a full 16 bit address to identify the target location.
+	//
+	// Operation:
+	// 0x2001: 'A' <---------------+
+	// ...                         |
+	// 0xfffc: {LDA_ABS}           |
+	// 0xfffd: 0x01 ---------------+ (LSB)
+	// 0xfffe: 0x20 ---------------+ (MSB)
+	//
+	// reg_.PC = 0xffff
+	// reg_.AC = 'A'
+	// reg_.Z = 1, if AC == 0 else 0
+	// reg_.N = 1, if |AC| > 127 else 0
 
 	auto m6502::exec_LDA_ABS_() -> void
 	{
 		const word wadd = read_mem_by_wpc();
 		byte value = read_mem_by_wadd(wadd);
-		exec_LDA_set_AZN_(value);
+		reg_.AC = value;
+		exec_LD_set_ZN_(value);
 	}
 
 	// LDA_ABSX: Absolute Indexed with X
@@ -158,6 +206,14 @@ namespace eg::m6502
 	//
 	// For example if X contains $92 then an STA $2000,X instruction will store the accumulator
 	// at $2092 (e.g. $2000 + $92).
+	//
+	// Operation:
+	// 0x2001: 'A' <--------------------------------------------+
+	// ...                                                      |
+	// 0xfffc: {LDA_ABSX}                                       |
+	// 0xfffd: 0x01 -------> + reg_.X (0x80) = 0x81 ------------+ (LSB)
+	// 0xfffe: 0x20 --------------------------------------------+ (MSB)
+	//
 
 	auto m6502::exec_LDA_ABSX_() -> void
 	{
@@ -173,12 +229,21 @@ namespace eg::m6502
 		}
 
 		byte value = read_mem_by_wadd(wadd_x); // 1
-		exec_LDA_set_AZN_(value);
+		reg_.AC = value;
+		exec_LD_set_ZN_(value);
 	}
 
 	// LDA_ABSY: Absolute Indexed with Y
 	//
 	// Same as LDA_ABSX but with Y register
+	//
+	// Operation:
+	// 0x2001: 'A' <--------------------------------------------+
+	// ...                                                      |
+	// 0xfffc: {LDA_ABSY}                                       |
+	// 0xfffd: 0x01 -------> + reg_.Y (0x80) = 0x81 ------------+ (LSB)
+	// 0xfffe: 0x20 --------------------------------------------+ (MSB)
+	//
 
 	auto m6502::exec_LDA_ABSY_() -> void
 	{
@@ -194,12 +259,25 @@ namespace eg::m6502
 		}
 
 		const byte value = read_mem_by_wadd(wadd_y); // 1
-		exec_LDA_set_AZN_(value);
+		reg_.AC = value;
+		exec_LD_set_ZN_(value);
 	}
 
 	// LDA_INDX: Indirect Indexed with X
 	//
+	// Operation:
+	// 0x0085: 0x01 -----+ (LSB) <------------------------+
+	// 0x0086: 0x02	-----+ (MSB)						  |
+	// ...               |                                |
+	// 0x0201: 'A'	<----+								  |
+	// ...                                                |
+	// 0xfffc: {LDA_INDX}                                 |
+	// 0xfffd: 0x05 -------> + reg_.X (0x80) & 0xff00 ----+
 	//
+	// reg_.PC = 0xfffe
+	// reg_.AC = 'A'
+	// reg_.Z = 1, if AC == 0 else 0
+	// reg_.N = 1, if |AC| > 127 else 0
 
 	auto m6502::exec_LDA_INDX_() -> void
 	{
@@ -218,8 +296,21 @@ namespace eg::m6502
 		const word wadd = ladd | (hadd << 8);
 
 		const byte value = read_mem_by_wadd(wadd); // 1 cycle
-		exec_LDA_set_AZN_(value);
+		reg_.AC = value;
+		exec_LD_set_ZN_(value);
 	}
+
+	// LDA_INDY: Indirect Indexed with Y
+	//
+	// Operation:
+	// 0x000e: 0x02 -----+ (LSB) <------------------------+
+	// 0x000f: 0x01	-----+ (MSB)						  |
+	//				     | + reg_.Y (0x80) = 0x0182	      |
+	// ...               |                                |
+	// 0x0182: 'A'	<----+								  |
+	// ...                                                |
+	// 0xfffc: {LDA_INDY}                                 |
+	// 0xfffd: 0x0e --------------------------------------+
 
 	auto m6502::exec_LDA_INDY_() -> void
 	{
@@ -238,12 +329,12 @@ namespace eg::m6502
 		}
 
 		const byte value = read_mem_by_wadd(wadd_y); // 1 cycle
-		exec_LDA_set_AZN_(value);
+		reg_.AC = value;
+		exec_LD_set_ZN_(value);
 	}
 
-	auto m6502::exec_LDA_set_AZN_(byte value) -> void
+	auto m6502::exec_LD_set_ZN_(byte value) -> void
 	{
-		reg_.AC = value;
 		reg_.SR.Z = (value == 0);
 		reg_.SR.N = (value & 0b10000000) > 0;
 	}
