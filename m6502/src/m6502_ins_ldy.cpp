@@ -23,7 +23,7 @@ namespace eg::m6502
 	{
 		const byte value = read_mem_by_bpc();
 		reg_.Y = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 
 	// LDY_ZP: Zero Page
@@ -56,7 +56,7 @@ namespace eg::m6502
 		const byte badd = read_mem_by_bpc();
 		const byte value = read_mem_by_badd(badd);
 		reg_.Y = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 
 	// LDY_ZPX: Zero Page Indexed with X
@@ -96,7 +96,7 @@ namespace eg::m6502
 		cycles_.simulate();
 		const byte value = read_mem_by_badd(badd);
 		reg_.Y = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 
 	// LDY_ABS: Absolute
@@ -120,7 +120,7 @@ namespace eg::m6502
 		const word wadd = read_mem_by_wpc();
 		const byte value = read_mem_by_wadd(wadd);
 		reg_.Y = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 
 	// LDY_ABSX: Absolute Indexed with X
@@ -148,6 +148,6 @@ namespace eg::m6502
 
 		const byte value = read_mem_by_wadd(wadd_x); // 1
 		reg_.Y = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 }

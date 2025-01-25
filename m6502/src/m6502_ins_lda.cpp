@@ -21,7 +21,7 @@ namespace eg::m6502
 	{
 		const byte value = read_mem_by_bpc();
 		reg_.AC = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 
 	// LDA_ZP: Zero Page
@@ -54,7 +54,7 @@ namespace eg::m6502
 		const byte badd = read_mem_by_bpc();
 		const byte value = read_mem_by_badd(badd);
 		reg_.AC = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 
 	// LDA_ZPX: Zero Page Indexed with X
@@ -94,7 +94,7 @@ namespace eg::m6502
 		cycles_.simulate();
 		const byte value = read_mem_by_badd(badd);
 		reg_.AC = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 
 	// LDA_ABS: Absolute
@@ -118,7 +118,7 @@ namespace eg::m6502
 		const word wadd = read_mem_by_wpc();
 		const byte value = read_mem_by_wadd(wadd);
 		reg_.AC = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 
 	// LDA_ABSX: Absolute Indexed with X
@@ -152,7 +152,7 @@ namespace eg::m6502
 
 		byte value = read_mem_by_wadd(wadd_x); // 1
 		reg_.AC = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 
 	// LDA_ABSY: Absolute Indexed with Y
@@ -182,7 +182,7 @@ namespace eg::m6502
 
 		const byte value = read_mem_by_wadd(wadd_y); // 1
 		reg_.AC = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 
 	// LDA_INDX: Indirect Indexed with X
@@ -219,7 +219,7 @@ namespace eg::m6502
 
 		const byte value = read_mem_by_wadd(wadd); // 1 cycle
 		reg_.AC = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 
 	// LDA_INDY: Indirect Indexed with Y
@@ -252,7 +252,7 @@ namespace eg::m6502
 
 		const byte value = read_mem_by_wadd(wadd_y); // 1 cycle
 		reg_.AC = value;
-		exec_LD_set_ZN_(value);
+		set_ZN_(value);
 	}
 
 	// LDX_IM: Immediate

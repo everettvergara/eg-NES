@@ -35,6 +35,8 @@ namespace eg::m6502
 		case LDY_ABSX: exec_LDY_ABSX_(); break;
 
 		case NOP_IMP: exec_NOP_IMP_(); break;
+
+		case INC_ZP: exec_INC_ZP_(); break;
 		default:
 			assert(false);
 			break;
@@ -89,8 +91,20 @@ namespace eg::m6502
 		return op_code;
 	}
 
+	auto m6502::write_mem_by_badd(byte address, byte value) -> void
+	{
+		cycles_.simulate();
+		mem_[address] = value;
+	}
+
 	auto m6502::get_reg() const -> const reg&
 	{
 		return reg_;
+	}
+
+	auto m6502::set_ZN_(byte value) -> void
+	{
+		reg_.SR.Z = (value == 0);
+		reg_.SR.N = (value & 0b10000000) > 0;
 	}
 }

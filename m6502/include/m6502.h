@@ -33,6 +33,8 @@ namespace eg::m6502
 		auto read_mem_by_wpc() -> word;
 		auto read_instruction() -> byte;
 
+		auto write_mem_by_badd(byte address, byte value) -> void;
+
 		auto get_reg() const->const reg&;
 
 	protected:
@@ -44,8 +46,7 @@ namespace eg::m6502
 		reg reg_;
 		mem mem_;
 
-		// LD
-		auto exec_LD_set_ZN_(byte value) -> void;
+		auto set_ZN_(byte value) -> void;
 
 		// LDA
 		auto exec_LDA_IM_() -> void;
@@ -73,5 +74,8 @@ namespace eg::m6502
 
 		// NOP
 		auto exec_NOP_IMP_() -> void;
+
+		// INC
+		auto exec_INC_ZP_() -> void;
 	};
 }

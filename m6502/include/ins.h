@@ -40,6 +40,9 @@ namespace eg::m6502
 	// NOP - No Operation
 	constexpr byte NOP_IMP = 0xEA;
 
+	// INC - Increment Memory
+	constexpr byte INC_ZP = 0xE6;
+
 	constexpr ins_attrib ins[256] =
 	{
 		{ "-", "-", 0, 0 },		// 0x00 - 0
@@ -272,7 +275,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xE3 - 227
 		{ "-", "-", 0, 0 },		// 0xE4 - 228
 		{ "-", "-", 0, 0 },		// 0xE5 - 229
-		{ "-", "-", 0, 0 },		// 0xE6 - 230
+		{ "INC", "ZP", 2, 5 },		// 0xE6 - 230
 		{ "-", "-", 0, 0 },		// 0xE7 - 231
 		{ "-", "-", 0, 0 },		// 0xE8 - 232
 		{ "-", "-", 0, 0 },		// 0xE9 - 233

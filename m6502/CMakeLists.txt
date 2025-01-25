@@ -7,11 +7,11 @@ add_library(eg_m6502 STATIC
 	"src/cycle.cpp"
 	"src/mem.cpp"
 	"src/m6502.cpp"
-	"src/m6502_ins_ld.cpp"
 	"src/m6502_ins_lda.cpp"
 	"src/m6502_ins_ldx.cpp"
 	"src/m6502_ins_ldy.cpp"
 	"src/m6502_ins_nop.cpp"
+	"src/m6502_ins_inc.cpp"
 	"src/reg.cpp"
 	"src/sr.cpp" )
 target_include_directories(eg_m6502 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
