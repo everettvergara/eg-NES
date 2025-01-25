@@ -34,6 +34,7 @@ namespace eg::m6502
 		auto read_instruction() -> byte;
 
 		auto write_mem_by_badd(byte address, byte value) -> void;
+		auto write_mem_by_wadd(word address, byte value) -> void;
 
 		auto get_reg() const->const reg&;
 
@@ -78,5 +79,7 @@ namespace eg::m6502
 		// INC
 		auto exec_INC_ZP_() -> void;
 		auto exec_INC_ZPX_() -> void;
+		auto exec_INC_ABS_() -> void;
+		auto exec_INC_ABSX_() -> void;
 	};
 }

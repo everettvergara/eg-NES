@@ -28,4 +28,32 @@ namespace eg::m6502
 		write_mem_by_badd(badd, value);
 		set_ZN_(value);
 	}
+
+	auto m6502::exec_INC_ABS_() -> void
+	{
+		// 1 Cycle - ins
+		const word wadd = read_mem_by_wpc(); // 2
+		byte value = read_mem_by_wadd(wadd); // 1
+
+		++value;
+		cycles_.simulate();	// 1
+
+		write_mem_by_wadd(wadd, value); // 1
+		set_ZN_(value);
+	}
+
+	auto m6502::exec_INC_ABSX_() -> void
+	{
+		// 1 Cycle - ins
+		const word wadd = read_mem_by_wpc() + reg_.X; // 3
+		cycles_.simulate();	// for adding x
+
+		byte value = read_mem_by_wadd(wadd); // 1
+
+		++value;
+		cycles_.simulate();	// 1
+
+		write_mem_by_wadd(wadd, value); // 1
+		set_ZN_(value);
+	}
 }

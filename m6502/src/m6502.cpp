@@ -38,6 +38,9 @@ namespace eg::m6502
 
 		case INC_ZP: exec_INC_ZP_(); break;
 		case INC_ZPX: exec_INC_ZPX_(); break;
+		case INC_ABS: exec_INC_ABS_(); break;
+		case INC_ABSX: exec_INC_ABSX_(); break;
+
 		default:
 			assert(false);
 			break;
@@ -93,6 +96,12 @@ namespace eg::m6502
 	}
 
 	auto m6502::write_mem_by_badd(byte address, byte value) -> void
+	{
+		cycles_.simulate();
+		mem_[address] = value;
+	}
+
+	auto m6502::write_mem_by_wadd(word address, byte value) -> void
 	{
 		cycles_.simulate();
 		mem_[address] = value;
