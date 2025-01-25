@@ -33,24 +33,26 @@ namespace eg::m6502
 		return test_INC_cpu_check(cpu, static_cast<word>(baddr), val + 1, TRESET_VECTOR_ADDRESS + 2);
 	}
 
-	//auto test_LDX_ZPY(byte val) -> bool
-	//{
-	//	m6502_generic cpu(TRESET_VECTOR_ADDRESS, TRESET_ROUTINE_ADDRESS);
+	auto test_INC_ZPX(byte val, byte X) -> bool
+	{
+		m6502_generic cpu(TRESET_VECTOR_ADDRESS, TRESET_ROUTINE_ADDRESS);
 
-	//	cpu.reset();
+		cpu.reset();
 
-	//	mem data;
+		mem data;
 
-	//	data[TRESET_VECTOR_ADDRESS] = LDX_ZPY;
-	//	data[TRESET_VECTOR_ADDRESS + 1] = 0x05;
-	//	data[0x00f5] = val;
+		data[TRESET_VECTOR_ADDRESS] = INC_ZPX;
 
-	//	cpu.test_load_mem(std::move(data));
-	//	cpu.test_load_reg_Y(0xf0);
-	//	cpu.exec();
+		byte baddr = 0x05;
+		data[TRESET_VECTOR_ADDRESS + 1] = baddr;
+		data[baddr + X] = val;
 
-	//	return test_LDX_reg_check(cpu.get_reg(), val, TRESET_VECTOR_ADDRESS + 2);
-	//}
+		cpu.test_load_mem(std::move(data));
+		cpu.test_load_reg_X(X);
+		cpu.exec();
+
+		return test_INC_cpu_check(cpu, static_cast<word>(baddr + X), val + 1, TRESET_VECTOR_ADDRESS + 2);
+	}
 
 	//auto test_LDX_ABS(byte val) -> bool
 	//{
@@ -98,9 +100,9 @@ namespace eg::m6502
 	auto test_INC_ZP_nzero_nneg() -> bool { return test_INC_ZP('A'); }
 	auto test_INC_ZP_zero_nneg() -> bool { return test_INC_ZP(255); }
 	auto test_INC_ZP_nzero_neg() -> bool { return test_INC_ZP(235); }
-	//auto test_LDX_ZPY_nzero_nneg() -> bool { return test_LDX_ZPY('A'); }
-	//auto test_LDX_ZPY_zero_nneg() -> bool { return test_LDX_ZPY(0); }
-	//auto test_LDX_ZPY_nzero_neg() -> bool { return test_LDX_ZPY(235); }
+	auto test_INC_ZPX_nzero_nneg_ncarry() -> bool { return test_INC_ZPX('A', 0x80); }
+	auto test_INC_ZPX_zero_nneg_ncarry() -> bool { return test_INC_ZPX(255, 0x80); }
+	auto test_INC_ZPX_nzero_neg_ncarry() -> bool { return test_INC_ZPX(235, 0x80); }
 	//auto test_LDX_ABS_nzero_nneg() -> bool { return test_LDX_ABS('A'); }
 	//auto test_LDX_ABS_zero_nneg() -> bool { return test_LDX_ABS(0); }
 	//auto test_LDX_ABS_nzero_neg() -> bool { return test_LDX_ABS(235); }
