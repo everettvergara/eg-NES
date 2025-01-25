@@ -23,6 +23,8 @@ namespace eg::m6502
 	constexpr byte LDA_INDX = 0xA1;
 	constexpr byte LDA_INDY = 0xB1;
 
+	// LDX - Load X Register
+
 	constexpr ins_attrib ins[256] =
 	{
 		{ "-", "-", 0, 0 },		// 0x00 - 0

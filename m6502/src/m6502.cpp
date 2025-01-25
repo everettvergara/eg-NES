@@ -184,16 +184,16 @@ namespace eg::m6502
 	{
 		// 1 cycle - ins
 		const word wadd = read_mem_by_wpc(); // 2 cycles for read_mem_by_wpc
-		const word wadd_x = wadd + reg_.Y;
+		const word wadd_y = wadd + reg_.Y;
 
 		// 1 cycle - for cross page boundary
-		if ((wadd_x & 0xFF00) not_eq (wadd & 0xFF00))
+		if ((wadd_y & 0xFF00) not_eq (wadd & 0xFF00))
 		{
 			cycles_.add(1);
 			cycles_.simulate();
 		}
 
-		const byte value = read_mem_by_wadd(wadd_x); // 1
+		const byte value = read_mem_by_wadd(wadd_y); // 1
 		exec_LDA_set_AZN_(value);
 	}
 

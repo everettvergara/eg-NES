@@ -5,9 +5,10 @@ namespace eg::m6502
 {
 	auto test_LDA_reg_check(const reg& t, byte val) -> bool
 	{
-		return t.AC == val and
-			t.SR.Z == (val == 0 ? 1 : 0) and
-			t.SR.N == (val & 0b10000000) > 0 ? 1 : 0;
+		auto r = (t.AC == val) and
+			(t.SR.Z == (val == 0 ? 1 : 0)) and
+			(t.SR.N == ((val & 0b10000000) > 0 ? 1 : 0));
+		return r;
 	}
 
 	auto test_LDA_IM(byte val) -> bool
@@ -93,8 +94,8 @@ namespace eg::m6502
 		data[RESET_VECTOR_ADDRESS + 1] = 0x02;
 		data[RESET_VECTOR_ADDRESS + 2] = 0x01;
 
-		const byte baddr = (0x01 + X);		// truncate to byte
-		const word waddr = 0x0100 + baddr;
+		//const byte baddr = (0x02 + X);
+		const word waddr = 0x0102 + X;
 
 		data[waddr] = val;
 
@@ -113,12 +114,12 @@ namespace eg::m6502
 
 		mem data;
 
-		data[RESET_VECTOR_ADDRESS] = LDA_ABSX;
+		data[RESET_VECTOR_ADDRESS] = LDA_ABSY;
 		data[RESET_VECTOR_ADDRESS + 1] = 0x02;
 		data[RESET_VECTOR_ADDRESS + 2] = 0x01;
 
-		const byte baddr = (0x01 + Y);		// truncate to byte
-		const word waddr = 0x0100 + baddr;
+		//const byte baddr = (0x02 + Y);		// truncate to byte
+		const word waddr = 0x0102 + Y;
 
 		data[waddr] = val;
 
@@ -141,7 +142,7 @@ namespace eg::m6502
 		data[RESET_VECTOR_ADDRESS + 1] = 0x01;
 
 		const byte baddr = (0x01 + X);		// truncate to byte
-		const word waddr = 0x0100 + baddr;
+		const word waddr = 0x0000 + baddr;
 
 		data[waddr] = 0x02;
 		data[waddr + 1] = 0x01;

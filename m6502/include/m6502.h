@@ -1,4 +1,7 @@
 #pragma once
+#if not defined(_WIN32) and not defined(_WIN64) and not defined(__APPLE__) and not defined(__MACH__) and not defined(__linux__)
+#error ERROR: Only support little endian architecture
+#endif
 
 #include <array>
 #include "reg.h"
@@ -50,5 +53,6 @@ namespace eg::m6502
 		auto exec_LDA_INDX_() -> void;
 		auto exec_LDA_INDY_() -> void;
 		auto exec_LDA_set_AZN_(byte value) -> void;
+		auto exec_set_ZN_(byte value) -> void;
 	};
 }
