@@ -1,23 +1,23 @@
-#include "m6502_ins_nop.h"
-#include "m6502_tester.h"
+#include "m6502_tins_nop.h"
+#include "m6502_generic.h"
 
 namespace eg::m6502
 {
 	auto test_NOP_IMP() -> bool
 	{
-		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+		m6502_generic cpu(TRESET_VECTOR_ADDRESS, TRESET_ROUTINE_ADDRESS);
 
 		cpu.reset();
 
 		mem data;
-		data[RESET_VECTOR_ADDRESS] = NOP_IMP;
+		data[TRESET_VECTOR_ADDRESS] = NOP_IMP;
 
 		const auto t = cpu.test_load_rnd_reg();
 		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 		const auto n = cpu.get_reg();
 
-		return (n.PC == RESET_VECTOR_ADDRESS + 1) and
+		return (n.PC == TRESET_VECTOR_ADDRESS + 1) and
 			(t.AC == n.AC) and
 			(t.X == n.X) and
 			(t.Y == n.Y) and

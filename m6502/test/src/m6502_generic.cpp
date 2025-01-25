@@ -1,4 +1,4 @@
-#include "m6502_tester.h"
+#include "m6502_generic.h"
 #include <cstdlib>
 
 namespace eg::m6502

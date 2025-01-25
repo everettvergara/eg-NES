@@ -112,6 +112,11 @@ namespace eg::m6502
 		return reg_;
 	}
 
+	auto m6502::get_mem() const -> const mem&
+	{
+		return mem_;
+	}
+
 	auto m6502::set_ZN_(byte value) -> void
 	{
 		reg_.SR.Z = (value == 0);

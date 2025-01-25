@@ -1,5 +1,5 @@
-#include "m6502_ins_lda.h"
-#include "m6502_tester.h"
+#include "m6502_tins_lda.h"
+#include "m6502_generic.h"
 
 namespace eg::m6502
 {
@@ -13,86 +13,86 @@ namespace eg::m6502
 
 	auto test_LDA_IM(byte val) -> bool
 	{
-		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+		m6502_generic cpu(TRESET_VECTOR_ADDRESS, TRESET_ROUTINE_ADDRESS);
 
 		cpu.reset();
 
 		mem data;
-		data[RESET_VECTOR_ADDRESS] = LDA_IM;
-		data[RESET_VECTOR_ADDRESS + 1] = val;
+		data[TRESET_VECTOR_ADDRESS] = LDA_IM;
+		data[TRESET_VECTOR_ADDRESS + 1] = val;
 
 		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 2);
+		return test_LDA_reg_check(cpu.get_reg(), val, TRESET_VECTOR_ADDRESS + 2);
 	}
 
 	auto test_LDA_ZP(byte val) -> bool
 	{
-		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+		m6502_generic cpu(TRESET_VECTOR_ADDRESS, TRESET_ROUTINE_ADDRESS);
 
 		cpu.reset();
 
 		mem data;
-		data[RESET_VECTOR_ADDRESS] = LDA_ZP;
-		data[RESET_VECTOR_ADDRESS + 1] = 0x05;
+		data[TRESET_VECTOR_ADDRESS] = LDA_ZP;
+		data[TRESET_VECTOR_ADDRESS + 1] = 0x05;
 		data[0x0005] = val;
 
 		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 2);
+		return test_LDA_reg_check(cpu.get_reg(), val, TRESET_VECTOR_ADDRESS + 2);
 	}
 
 	auto test_LDA_ZPX(byte val) -> bool
 	{
-		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+		m6502_generic cpu(TRESET_VECTOR_ADDRESS, TRESET_ROUTINE_ADDRESS);
 
 		cpu.reset();
 
 		mem data;
 
-		data[RESET_VECTOR_ADDRESS] = LDA_ZPX;
-		data[RESET_VECTOR_ADDRESS + 1] = 0x05;
+		data[TRESET_VECTOR_ADDRESS] = LDA_ZPX;
+		data[TRESET_VECTOR_ADDRESS + 1] = 0x05;
 		data[0x00f5] = val;
 
 		cpu.test_load_mem(std::move(data));
 		cpu.test_load_reg_X(0xf0);
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 2);
+		return test_LDA_reg_check(cpu.get_reg(), val, TRESET_VECTOR_ADDRESS + 2);
 	}
 
 	auto test_LDA_ABS(byte val) -> bool
 	{
-		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+		m6502_generic cpu(TRESET_VECTOR_ADDRESS, TRESET_ROUTINE_ADDRESS);
 
 		cpu.reset();
 
 		mem data;
 
-		data[RESET_VECTOR_ADDRESS] = LDA_ABS;
-		data[RESET_VECTOR_ADDRESS + 1] = 0x02;
-		data[RESET_VECTOR_ADDRESS + 2] = 0x01;
+		data[TRESET_VECTOR_ADDRESS] = LDA_ABS;
+		data[TRESET_VECTOR_ADDRESS + 1] = 0x02;
+		data[TRESET_VECTOR_ADDRESS + 2] = 0x01;
 		data[0x0102] = val;
 
 		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 3);
+		return test_LDA_reg_check(cpu.get_reg(), val, TRESET_VECTOR_ADDRESS + 3);
 	}
 
 	auto test_LDA_ABSX(byte val, byte X) -> bool
 	{
-		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+		m6502_generic cpu(TRESET_VECTOR_ADDRESS, TRESET_ROUTINE_ADDRESS);
 
 		cpu.reset();
 
 		mem data;
 
-		data[RESET_VECTOR_ADDRESS] = LDA_ABSX;
-		data[RESET_VECTOR_ADDRESS + 1] = 0x02;
-		data[RESET_VECTOR_ADDRESS + 2] = 0x01;
+		data[TRESET_VECTOR_ADDRESS] = LDA_ABSX;
+		data[TRESET_VECTOR_ADDRESS + 1] = 0x02;
+		data[TRESET_VECTOR_ADDRESS + 2] = 0x01;
 
 		//const byte baddr = (0x02 + X);
 		const word waddr = 0x0102 + X;
@@ -103,20 +103,20 @@ namespace eg::m6502
 		cpu.test_load_reg_X(X);
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 3);
+		return test_LDA_reg_check(cpu.get_reg(), val, TRESET_VECTOR_ADDRESS + 3);
 	}
 
 	auto test_LDA_ABSY(byte val, byte Y) -> bool
 	{
-		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+		m6502_generic cpu(TRESET_VECTOR_ADDRESS, TRESET_ROUTINE_ADDRESS);
 
 		cpu.reset();
 
 		mem data;
 
-		data[RESET_VECTOR_ADDRESS] = LDA_ABSY;
-		data[RESET_VECTOR_ADDRESS + 1] = 0x02;
-		data[RESET_VECTOR_ADDRESS + 2] = 0x01;
+		data[TRESET_VECTOR_ADDRESS] = LDA_ABSY;
+		data[TRESET_VECTOR_ADDRESS + 1] = 0x02;
+		data[TRESET_VECTOR_ADDRESS + 2] = 0x01;
 
 		//const byte baddr = (0x02 + Y);		// truncate to byte
 		const word waddr = 0x0102 + Y;
@@ -127,19 +127,19 @@ namespace eg::m6502
 		cpu.test_load_reg_Y(Y);
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 3);
+		return test_LDA_reg_check(cpu.get_reg(), val, TRESET_VECTOR_ADDRESS + 3);
 	}
 
 	auto test_LDA_INDX(byte val, byte X) -> bool
 	{
-		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+		m6502_generic cpu(TRESET_VECTOR_ADDRESS, TRESET_ROUTINE_ADDRESS);
 
 		cpu.reset();
 
 		mem data;
 
-		data[RESET_VECTOR_ADDRESS] = LDA_INDX;
-		data[RESET_VECTOR_ADDRESS + 1] = 0x01;
+		data[TRESET_VECTOR_ADDRESS] = LDA_INDX;
+		data[TRESET_VECTOR_ADDRESS + 1] = 0x01;
 
 		const byte baddr = (0x01 + X);		// truncate to byte
 		const word waddr = 0x0000 + baddr;
@@ -152,19 +152,19 @@ namespace eg::m6502
 		cpu.test_load_reg_X(X);
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 2);
+		return test_LDA_reg_check(cpu.get_reg(), val, TRESET_VECTOR_ADDRESS + 2);
 	}
 
 	auto test_LDA_INDY(byte val, byte Y) -> bool
 	{
-		m6502_generic cpu(RESET_VECTOR_ADDRESS, RESET_ROUTINE_ADDRESS);
+		m6502_generic cpu(TRESET_VECTOR_ADDRESS, TRESET_ROUTINE_ADDRESS);
 
 		cpu.reset();
 
 		mem data;
 
-		data[RESET_VECTOR_ADDRESS] = LDA_INDY;
-		data[RESET_VECTOR_ADDRESS + 1] = 0x0e;
+		data[TRESET_VECTOR_ADDRESS] = LDA_INDY;
+		data[TRESET_VECTOR_ADDRESS + 1] = 0x0e;
 		data[0x000e] = 0x02;
 		data[0x000f] = 0x01;
 
@@ -176,7 +176,7 @@ namespace eg::m6502
 		cpu.test_load_reg_Y(Y);
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 2);
+		return test_LDA_reg_check(cpu.get_reg(), val, TRESET_VECTOR_ADDRESS + 2);
 	}
 
 	auto test_LDA_IM_nzero_nneg() -> bool { return test_LDA_IM('A'); }

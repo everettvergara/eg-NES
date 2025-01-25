@@ -37,6 +37,7 @@ namespace eg::m6502
 		auto write_mem_by_wadd(word address, byte value) -> void;
 
 		auto get_reg() const->const reg&;
+		auto get_mem() const->const mem&;
 
 	protected:
 

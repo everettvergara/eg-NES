@@ -2,7 +2,7 @@
 
 #include "types.h"
 #include "reg.h"
-#include "m6502_ins_common.h"
+#include "m6502_tins_common.h"
 
 namespace eg::m6502
 {

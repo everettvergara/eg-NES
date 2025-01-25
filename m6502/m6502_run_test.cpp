@@ -7,10 +7,11 @@
 //#include <iostream>
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
-#include "m6502_ins_lda.h"
-#include "m6502_ins_ldx.h"
-#include "m6502_ins_ldy.h"
-#include "m6502_ins_nop.h"
+#include "m6502_tins_lda.h"
+#include "m6502_tins_ldx.h"
+#include "m6502_tins_ldy.h"
+#include "m6502_tins_nop.h"
+#include "m6502_tins_inc.h"
 
 using namespace eg::m6502;
 TEST_CASE("m6502 Instructions:")
@@ -102,5 +103,12 @@ TEST_CASE("m6502 Instructions:")
 	SECTION("NOP")
 	{
 		REQUIRE_NOTHROW([]() {CHECK(test_NOP_IMP()); }());
+	}
+
+	SECTION("INC")
+	{
+		REQUIRE_NOTHROW([]() {CHECK(test_INC_ZP_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_INC_ZP_zero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_INC_ZP_nzero_neg()); }());
 	}
 }
