@@ -22,7 +22,12 @@ namespace eg::m6502
 	constexpr byte LDA_ABSY = 0xB9;
 	constexpr byte LDA_INDX = 0xA1;
 	constexpr byte LDA_INDY = 0xB1;
+
 	constexpr byte LDX_IM = 0xA2;
+	constexpr byte LDX_ZP = 0xA6;
+	constexpr byte LDX_ZPY = 0xB6;
+	constexpr byte LDX_ABS = 0xAE;
+	constexpr byte LDX_ABSY = 0xBE;
 
 	// LDX - Load X Register
 
@@ -194,7 +199,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xA3 - 163
 		{ "-", "-", 0, 0 },		// 0xA4 - 164
 		{ "LDA", "ZP", 2, 3 },		// 0xA5 - 165
-		{ "-", "-", 0, 0 },		// 0xA6 - 166
+		{ "LDX", "ZP", 2, 3 },		// 0xA6 - 166
 		{ "-", "-", 0, 0 },		// 0xA7 - 167
 		{ "-", "-", 0, 0 },		// 0xA8 - 168
 		{ "LDA", "IM", 2, 2 },		// 0xA9 - 169
@@ -202,7 +207,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xAB - 171
 		{ "-", "-", 0, 0 },		// 0xAC - 172
 		{ "LDA", "ABS", 3, 4 },		// 0xAD - 173
-		{ "-", "-", 0, 0 },		// 0xAE - 174
+		{ "LDX", "ABS", 3, 4 },		// 0xAE - 174
 		{ "-", "-", 0, 0 },		// 0xAF - 175
 		{ "-", "-", 0, 0 },		// 0xB0 - 176
 		{ "LDA", "INDY", 2, 5 },		// 0xB1 - 177
@@ -210,7 +215,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xB3 - 179
 		{ "-", "-", 0, 0 },		// 0xB4 - 180
 		{ "LDA", "ZPX", 2, 4 },		// 0xB5 - 181
-		{ "-", "-", 0, 0 },		// 0xB6 - 182
+		{ "LDX", "ZPY", 2, 4 },		// 0xB6 - 182
 		{ "-", "-", 0, 0 },		// 0xB7 - 183
 		{ "-", "-", 0, 0 },		// 0xB8 - 184
 		{ "LDA", "ABSY", 3, 4 },	// 0xB9 - 185
@@ -218,7 +223,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xBB - 187
 		{ "-", "-", 0, 0 },		// 0xBC - 188
 		{ "LDA", "ABSX", 3, 4 },// 0xBD - 189
-		{ "-", "-", 0, 0 },		// 0xBE - 190
+		{ "LDX", "ABSY", 3, 4 },	// 0xBE - 190
 		{ "-", "-", 0, 0 },		// 0xBF - 191
 		{ "-", "-", 0, 0 },		// 0xC0 - 192
 		{ "-", "-", 0, 0 },		// 0xC1 - 193

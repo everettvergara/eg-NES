@@ -2,12 +2,10 @@
 
 #include "types.h"
 #include "reg.h"
+#include "m6502_ins_common.h"
 
 namespace eg::m6502
 {
-	inline constexpr word RESET_VECTOR_ADDRESS = 0xfffc;
-	inline constexpr word RESET_ROUTINE_ADDRESS = 0x0000;
-
 	auto test_LDA_reg_check(const reg& t, byte val, word pc_add) -> bool;
 
 	auto test_LDA_IM(byte val) -> bool;

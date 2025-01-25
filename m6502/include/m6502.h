@@ -56,6 +56,10 @@ namespace eg::m6502
 
 		// LDX
 		auto exec_LDX_IM_() -> void;
+		auto exec_LDX_ZP_() -> void;
+		auto exec_LDX_ZPY_() -> void;
+		auto exec_LDX_ABS_() -> void;
+		auto exec_LDX_ABSY_() -> void;
 
 		auto exec_LD_set_ZN_(byte value) -> void;
 		auto exec_set_ZN_(byte value) -> void;

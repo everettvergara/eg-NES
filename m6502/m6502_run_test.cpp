@@ -8,6 +8,7 @@
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
 #include "m6502_ins_lda.h"
+#include "m6502_ins_ldx.h"
 
 using namespace eg::m6502;
 TEST_CASE("m6502 Instructions:")
@@ -50,5 +51,27 @@ TEST_CASE("m6502 Instructions:")
 		REQUIRE_NOTHROW([]() {CHECK(test_LDA_INDY_nzero_nneg_carry()); }());
 		REQUIRE_NOTHROW([]() {CHECK(test_LDA_INDY_zero_nneg_carry()); }());
 		REQUIRE_NOTHROW([]() {CHECK(test_LDA_INDY_nzero_neg_carry()); }());
+	}
+
+	SECTION("LDX")
+	{
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_IM_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_IM_zero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_IM_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ZP_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ZP_zero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ZP_nzero_neg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ZPY_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ZPY_zero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ZPY_nzero_neg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ABS_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ABS_zero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ABS_nzero_neg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ABSY_nzero_nneg_ncarry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ABSY_zero_nneg_ncarry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ABSY_nzero_neg_ncarry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ABSY_nzero_nneg_carry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ABSY_zero_nneg_carry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_LDX_ABSY_nzero_neg_carry()); }());
 	}
 }
