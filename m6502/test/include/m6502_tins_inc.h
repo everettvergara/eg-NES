@@ -11,8 +11,8 @@ namespace eg::m6502
 
 	auto test_INC_ZP(byte val) -> bool;
 	auto test_INC_ZPX(byte val, byte X) -> bool;
-	//auto test_LDX_ABS(byte val) -> bool;
-	//auto test_LDX_ABSY(byte val, byte Y) -> bool;
+	auto test_INC_ABS(byte val) -> bool;
+	auto test_INC_ABSX(byte val) -> bool;
 
 	auto test_INC_ZP_nzero_nneg() -> bool;
 	auto test_INC_ZP_zero_nneg() -> bool;
@@ -23,18 +23,13 @@ namespace eg::m6502
 	auto test_INC_ZPX_nzero_nneg_carry() -> bool;
 	auto test_INC_ZPX_zero_nneg_carry() -> bool;
 	auto test_INC_ZPX_nzero_neg_carry() -> bool;
-
 	auto test_INC_ABS_nzero_nneg() -> bool;
 	auto test_INC_ABS_zero_nneg() -> bool;
 	auto test_INC_ABS_nzero_neg() -> bool;
-
-	//auto test_LDX_ABS_nzero_nneg() -> bool;
-	//auto test_LDX_ABS_zero_nneg() -> bool;
-	//auto test_LDX_ABS_nzero_neg() -> bool;
-	//auto test_LDX_ABSY_nzero_nneg_ncarry() -> bool;
-	//auto test_LDX_ABSY_zero_nneg_ncarry() -> bool;
-	//auto test_LDX_ABSY_nzero_neg_ncarry() -> bool;
-	//auto test_LDX_ABSY_nzero_nneg_carry() -> bool;
-	//auto test_LDX_ABSY_zero_nneg_carry() -> bool;
-	//auto test_LDX_ABSY_nzero_neg_carry() -> bool;
+	auto test_INC_ABSX_nzero_nneg_ncarry() -> bool;
+	auto test_INC_ABSX_zero_nneg_ncarry() -> bool;
+	auto test_INC_ABSX_nzero_neg_ncarry() -> bool;
+	auto test_INC_ABSX_nzero_nneg_carry() -> bool;
+	auto test_INC_ABSX_zero_nneg_carry() -> bool;
+	auto test_INC_ABSX_nzero_neg_carry() -> bool;
 }
