@@ -20,6 +20,7 @@ add_executable (eg_m6502_run_test
 	"m6502_run_test.cpp"
 	"test/src/m6502_ins_lda.cpp"
 	"test/src/m6502_ins_ldx.cpp"
+	"test/src/m6502_ins_ldy.cpp"
 	"test/src/m6502_tester.cpp")
 
 target_link_libraries(eg_m6502_run_test PRIVATE 

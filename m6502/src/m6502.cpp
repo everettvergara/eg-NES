@@ -619,7 +619,7 @@ namespace eg::m6502
 	// 0xfffe: 0x20 --------------------------------------------+ (MSB)
 	//
 
-	auto m6502::exec_LDX_ABSY_() -> void
+	auto m6502::exec_LDY_ABSX_() -> void
 	{
 		// 1 cycle - ins
 		const word wadd = read_mem_by_wpc(); // 2 cycles for read_mem_by_wpc
