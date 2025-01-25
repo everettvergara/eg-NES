@@ -77,5 +77,6 @@ namespace eg::m6502
 
 		// INC
 		auto exec_INC_ZP_() -> void;
+		auto exec_INC_ZPX_() -> void;
 	};
 }

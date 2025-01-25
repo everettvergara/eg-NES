@@ -37,6 +37,7 @@ namespace eg::m6502
 		case NOP_IMP: exec_NOP_IMP_(); break;
 
 		case INC_ZP: exec_INC_ZP_(); break;
+		case INC_ZPX: exec_INC_ZPX_(); break;
 		default:
 			assert(false);
 			break;

@@ -42,6 +42,7 @@ namespace eg::m6502
 
 	// INC - Increment Memory
 	constexpr byte INC_ZP = 0xE6;
+	constexpr byte INC_ZPX = 0xF6;
 
 	constexpr ins_attrib ins[256] =
 	{
@@ -291,7 +292,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xF3 - 243
 		{ "-", "-", 0, 0 },		// 0xF4 - 244
 		{ "-", "-", 0, 0 },		// 0xF5 - 245
-		{ "-", "-", 0, 0 },		// 0xF6 - 246
+		{ "INC", "ZPX", 2, 6 },		// 0xF6 - 246
 		{ "-", "-", 0, 0 },		// 0xF7 - 247
 		{ "-", "-", 0, 0 },		// 0xF8 - 248
 		{ "-", "-", 0, 0 },		// 0xF9 - 249
