@@ -10,6 +10,7 @@
 #include "m6502_ins_lda.h"
 #include "m6502_ins_ldx.h"
 #include "m6502_ins_ldy.h"
+#include "m6502_ins_nop.h"
 
 using namespace eg::m6502;
 TEST_CASE("m6502 Instructions:")
@@ -96,5 +97,10 @@ TEST_CASE("m6502 Instructions:")
 		REQUIRE_NOTHROW([]() {CHECK(test_LDY_ABSX_nzero_nneg_carry()); }());
 		REQUIRE_NOTHROW([]() {CHECK(test_LDY_ABSX_zero_nneg_carry()); }());
 		REQUIRE_NOTHROW([]() {CHECK(test_LDY_ABSX_nzero_neg_carry()); }());
+	}
+
+	SECTION("NOP")
+	{
+		REQUIRE_NOTHROW([]() {CHECK(test_NOP_IMP()); }());
 	}
 }

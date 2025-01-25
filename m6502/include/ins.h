@@ -37,6 +37,9 @@ namespace eg::m6502
 	constexpr byte LDY_ABS = 0xAC;
 	constexpr byte LDY_ABSX = 0xBC;
 
+	// NOP - No Operation
+	constexpr byte NOP_IMP = 0xEA;
+
 	constexpr ins_attrib ins[256] =
 	{
 		{ "-", "-", 0, 0 },		// 0x00 - 0
@@ -273,7 +276,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xE7 - 231
 		{ "-", "-", 0, 0 },		// 0xE8 - 232
 		{ "-", "-", 0, 0 },		// 0xE9 - 233
-		{ "-", "-", 0, 0 },		// 0xEA - 234
+		{ "NOP", "IMP", 1, 2 },		// 0xEA - 234
 		{ "-", "-", 0, 0 },		// 0xEB - 235
 		{ "-", "-", 0, 0 },		// 0xEC - 236
 		{ "-", "-", 0, 0 },		// 0xED - 237

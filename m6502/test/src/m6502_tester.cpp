@@ -34,6 +34,24 @@ namespace eg::m6502
 		reg_.Y = Y;
 	}
 
+	auto m6502_generic::test_load_rnd_reg() -> reg
+	{
+		reg_.AC = rand();
+		reg_.X = rand();
+		reg_.Y = rand();
+		reg_.SP = rand();
+		reg_.SR.B = rand() & 0x01;
+		reg_.SR.C = rand() & 0x01;
+		reg_.SR.D = rand() & 0x01;
+		reg_.SR.I = rand() & 0x01;
+		reg_.SR.N = rand() & 0x01;
+		reg_.SR.V = rand() & 0x01;
+		reg_.SR.Z = rand() & 0x01;
+		reg_.SR._ = rand() & 0x01;
+
+		return reg_;
+	}
+
 	auto m6502_generic::test_loader() -> void
 	{
 		// LDA_INDY - no carry

@@ -34,6 +34,7 @@ namespace eg::m6502
 		case LDY_ABS: exec_LDY_ABS_(); break;
 		case LDY_ABSX: exec_LDY_ABSX_(); break;
 
+		case NOP_IMP: exec_NOP_IMP_(); break;
 		default:
 			assert(false);
 			break;

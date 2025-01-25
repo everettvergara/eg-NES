@@ -11,8 +11,9 @@ add_library(eg_m6502 STATIC
 	"src/m6502_ins_lda.cpp"
 	"src/m6502_ins_ldx.cpp"
 	"src/m6502_ins_ldy.cpp"
+	"src/m6502_ins_nop.cpp"
 	"src/reg.cpp"
-	"src/sr.cpp")
+	"src/sr.cpp" )
 target_include_directories(eg_m6502 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 
@@ -25,6 +26,7 @@ add_executable (eg_m6502_run_test
 	"test/src/m6502_ins_lda.cpp"
 	"test/src/m6502_ins_ldx.cpp"
 	"test/src/m6502_ins_ldy.cpp"
+	"test/src/m6502_ins_nop.cpp"
 	"test/src/m6502_tester.cpp")
 
 target_link_libraries(eg_m6502_run_test PRIVATE 

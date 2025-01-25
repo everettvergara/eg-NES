@@ -44,6 +44,9 @@ namespace eg::m6502
 		reg reg_;
 		mem mem_;
 
+		// LD
+		auto exec_LD_set_ZN_(byte value) -> void;
+
 		// LDA
 		auto exec_LDA_IM_() -> void;
 		auto exec_LDA_ZP_() -> void;
@@ -68,7 +71,7 @@ namespace eg::m6502
 		auto exec_LDY_ABS_() -> void;
 		auto exec_LDY_ABSX_() -> void;
 
-		auto exec_LD_set_ZN_(byte value) -> void;
-		auto exec_set_ZN_(byte value) -> void;
+		// NOP
+		auto exec_NOP_IMP_() -> void;
 	};
 }
