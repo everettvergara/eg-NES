@@ -23,13 +23,19 @@ namespace eg::m6502
 	constexpr byte LDA_INDX = 0xA1;
 	constexpr byte LDA_INDY = 0xB1;
 
+	// LDX - Load X Register
 	constexpr byte LDX_IM = 0xA2;
 	constexpr byte LDX_ZP = 0xA6;
 	constexpr byte LDX_ZPY = 0xB6;
 	constexpr byte LDX_ABS = 0xAE;
 	constexpr byte LDX_ABSY = 0xBE;
 
-	// LDX - Load X Register
+	// LDY - Load Y Register
+	constexpr byte LDY_IM = 0xA0;
+	constexpr byte LDY_ZP = 0xA4;
+	constexpr byte LDY_ZPX = 0xB4;
+	constexpr byte LDY_ABS = 0xAC;
+	constexpr byte LDY_ABSX = 0xBC;
 
 	constexpr ins_attrib ins[256] =
 	{
@@ -193,11 +199,11 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0x9D - 157
 		{ "-", "-", 0, 0 },		// 0x9E - 158
 		{ "-", "-", 0, 0 },		// 0x9F - 159
-		{ "-", "-", 0, 0 },		// 0xA0 - 160
+		{ "LDY", "IM", 2, 2 },		// 0xA0 - 160
 		{ "LDA", "INDX", 2, 6 },	// 0xA1 - 161
 		{ "LDX", "IM", 2, 2 },		// 0xA2 - 162
 		{ "-", "-", 0, 0 },		// 0xA3 - 163
-		{ "-", "-", 0, 0 },		// 0xA4 - 164
+		{ "LDY", "ZP", 2, 3 },		// 0xA4 - 164
 		{ "LDA", "ZP", 2, 3 },		// 0xA5 - 165
 		{ "LDX", "ZP", 2, 3 },		// 0xA6 - 166
 		{ "-", "-", 0, 0 },		// 0xA7 - 167
@@ -205,7 +211,7 @@ namespace eg::m6502
 		{ "LDA", "IM", 2, 2 },		// 0xA9 - 169
 		{ "-", "-", 0, 0 },		// 0xAA - 170
 		{ "-", "-", 0, 0 },		// 0xAB - 171
-		{ "-", "-", 0, 0 },		// 0xAC - 172
+		{ "LDY", "ABS", 3, 4 },		// 0xAC - 172
 		{ "LDA", "ABS", 3, 4 },		// 0xAD - 173
 		{ "LDX", "ABS", 3, 4 },		// 0xAE - 174
 		{ "-", "-", 0, 0 },		// 0xAF - 175
@@ -213,7 +219,7 @@ namespace eg::m6502
 		{ "LDA", "INDY", 2, 5 },		// 0xB1 - 177
 		{ "-", "-", 0, 0 },		// 0xB2 - 178
 		{ "-", "-", 0, 0 },		// 0xB3 - 179
-		{ "-", "-", 0, 0 },		// 0xB4 - 180
+		{ "LDY", "ZPX", 2, 4 },		// 0xB4 - 180
 		{ "LDA", "ZPX", 2, 4 },		// 0xB5 - 181
 		{ "LDX", "ZPY", 2, 4 },		// 0xB6 - 182
 		{ "-", "-", 0, 0 },		// 0xB7 - 183
@@ -221,7 +227,7 @@ namespace eg::m6502
 		{ "LDA", "ABSY", 3, 4 },	// 0xB9 - 185
 		{ "-", "-", 0, 0 },		// 0xBA - 186
 		{ "-", "-", 0, 0 },		// 0xBB - 187
-		{ "-", "-", 0, 0 },		// 0xBC - 188
+		{ "LDY", "ABSX", 3, 4 },		// 0xBC - 188
 		{ "LDA", "ABSX", 3, 4 },// 0xBD - 189
 		{ "LDX", "ABSY", 3, 4 },	// 0xBE - 190
 		{ "-", "-", 0, 0 },		// 0xBF - 191

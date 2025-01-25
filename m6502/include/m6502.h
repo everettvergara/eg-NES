@@ -61,6 +61,13 @@ namespace eg::m6502
 		auto exec_LDX_ABS_() -> void;
 		auto exec_LDX_ABSY_() -> void;
 
+		// LDY
+		auto exec_LDY_IM_() -> void;
+		auto exec_LDY_ZP_() -> void;
+		auto exec_LDY_ZPX_() -> void;
+		auto exec_LDY_ABS_() -> void;
+		auto exec_LDY_ABSX_() -> void;
+
 		auto exec_LD_set_ZN_(byte value) -> void;
 		auto exec_set_ZN_(byte value) -> void;
 	};
