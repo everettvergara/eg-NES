@@ -20,6 +20,14 @@ namespace eg::m6502
 	auto test_INC_ZPX_nzero_nneg_ncarry() -> bool;
 	auto test_INC_ZPX_zero_nneg_ncarry() -> bool;
 	auto test_INC_ZPX_nzero_neg_ncarry() -> bool;
+	auto test_INC_ZPX_nzero_nneg_carry() -> bool;
+	auto test_INC_ZPX_zero_nneg_carry() -> bool;
+	auto test_INC_ZPX_nzero_neg_carry() -> bool;
+
+	auto test_INC_ABS_nzero_nneg() -> bool;
+	auto test_INC_ABS_zero_nneg() -> bool;
+	auto test_INC_ABS_nzero_neg() -> bool;
+
 	//auto test_LDX_ABS_nzero_nneg() -> bool;
 	//auto test_LDX_ABS_zero_nneg() -> bool;
 	//auto test_LDX_ABS_nzero_neg() -> bool;

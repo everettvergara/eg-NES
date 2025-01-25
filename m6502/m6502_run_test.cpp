@@ -110,9 +110,14 @@ TEST_CASE("m6502 Instructions:")
 		REQUIRE_NOTHROW([]() {CHECK(test_INC_ZP_nzero_nneg()); }());
 		REQUIRE_NOTHROW([]() {CHECK(test_INC_ZP_zero_nneg()); }());
 		REQUIRE_NOTHROW([]() {CHECK(test_INC_ZP_nzero_neg()); }());
-
 		REQUIRE_NOTHROW([]() {CHECK(test_INC_ZPX_nzero_nneg_ncarry()); }());
 		REQUIRE_NOTHROW([]() {CHECK(test_INC_ZPX_zero_nneg_ncarry()); }());
 		REQUIRE_NOTHROW([]() {CHECK(test_INC_ZPX_nzero_neg_ncarry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_INC_ZPX_nzero_nneg_carry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_INC_ZPX_zero_nneg_carry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_INC_ZPX_nzero_neg_carry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_INC_ABS_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_INC_ABS_zero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_INC_ABS_nzero_neg()); }());
 	}
 }
