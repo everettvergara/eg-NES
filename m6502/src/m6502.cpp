@@ -23,6 +23,9 @@ namespace eg::m6502
 		case LDA_ABSY: exec_LDA_ABSY_(); break;
 		case LDA_INDX: exec_LDA_INDX_(); break;
 		case LDA_INDY: exec_LDA_INDY_(); break;
+
+			// LDX
+		case LDX_IM: exec_LDX_IM_(); break;
 		default:
 			break;
 		}
@@ -97,7 +100,7 @@ namespace eg::m6502
 
 	auto m6502::exec_LDA_IM_() -> void
 	{
-		byte value = read_mem_by_bpc();
+		const byte value = read_mem_by_bpc();
 		reg_.AC = value;
 		exec_LD_set_ZN_(value);
 	}
@@ -130,7 +133,7 @@ namespace eg::m6502
 	auto m6502::exec_LDA_ZP_() -> void
 	{
 		const byte badd = read_mem_by_bpc();
-		byte value = read_mem_by_badd(badd);
+		const byte value = read_mem_by_badd(badd);
 		reg_.AC = value;
 		exec_LD_set_ZN_(value);
 	}
@@ -170,7 +173,7 @@ namespace eg::m6502
 		// The addition and wrapping are handled in hardware and cost 1 cycle.
 
 		cycles_.simulate();
-		byte value = read_mem_by_badd(badd);
+		const byte value = read_mem_by_badd(badd);
 		reg_.AC = value;
 		exec_LD_set_ZN_(value);
 	}
@@ -194,7 +197,7 @@ namespace eg::m6502
 	auto m6502::exec_LDA_ABS_() -> void
 	{
 		const word wadd = read_mem_by_wpc();
-		byte value = read_mem_by_wadd(wadd);
+		const byte value = read_mem_by_wadd(wadd);
 		reg_.AC = value;
 		exec_LD_set_ZN_(value);
 	}
@@ -330,6 +333,27 @@ namespace eg::m6502
 
 		const byte value = read_mem_by_wadd(wadd_y); // 1 cycle
 		reg_.AC = value;
+		exec_LD_set_ZN_(value);
+	}
+
+	// LDX_IM: Immediate
+	//
+	// Immediate addressing allows the programmer to directly specify an 8 bit constant within the instruction.
+	//
+	// Operation:
+	// 0xfffc: {LDX_IM}
+	// 0xfffd: 'A'
+	//
+	// exec();
+	// reg_.PC = 0xfffe
+	// reg_.X = 'A'
+	// reg_.Z = 1, if X == 0 else 0
+	// reg_.N = 1, if |X| > 127 else 0
+
+	auto m6502::exec_LDX_IM_() -> void
+	{
+		const byte value = read_mem_by_bpc();
+		reg_.X = value;
 		exec_LD_set_ZN_(value);
 	}
 

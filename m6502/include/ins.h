@@ -22,6 +22,7 @@ namespace eg::m6502
 	constexpr byte LDA_ABSY = 0xB9;
 	constexpr byte LDA_INDX = 0xA1;
 	constexpr byte LDA_INDY = 0xB1;
+	constexpr byte LDX_IM = 0xA2;
 
 	// LDX - Load X Register
 
@@ -189,7 +190,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0x9F - 159
 		{ "-", "-", 0, 0 },		// 0xA0 - 160
 		{ "LDA", "INDX", 2, 6 },	// 0xA1 - 161
-		{ "-", "-", 0, 0 },		// 0xA2 - 162
+		{ "LDX", "IM", 2, 2 },		// 0xA2 - 162
 		{ "-", "-", 0, 0 },		// 0xA3 - 163
 		{ "-", "-", 0, 0 },		// 0xA4 - 164
 		{ "LDA", "ZP", 2, 3 },		// 0xA5 - 165

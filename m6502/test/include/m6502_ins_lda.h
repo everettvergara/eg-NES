@@ -8,7 +8,7 @@ namespace eg::m6502
 	inline constexpr word RESET_VECTOR_ADDRESS = 0xfffc;
 	inline constexpr word RESET_ROUTINE_ADDRESS = 0x0000;
 
-	auto test_LDA_reg_check(const reg& t, byte val) -> bool;
+	auto test_LDA_reg_check(const reg& t, byte val, word pc_add) -> bool;
 
 	auto test_LDA_IM(byte val) -> bool;
 	auto test_LDA_ZP(byte val) -> bool;

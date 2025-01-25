@@ -3,12 +3,12 @@
 
 namespace eg::m6502
 {
-	auto test_LDA_reg_check(const reg& t, byte val) -> bool
+	auto test_LDA_reg_check(const reg& t, byte val, word pc_add) -> bool
 	{
-		auto r = (t.AC == val) and
+		return (t.AC == val) and
 			(t.SR.Z == (val == 0 ? 1 : 0)) and
-			(t.SR.N == ((val & 0b10000000) > 0 ? 1 : 0));
-		return r;
+			(t.SR.N == ((val & 0b10000000) > 0 ? 1 : 0)) and
+			(t.PC == pc_add);
 	}
 
 	auto test_LDA_IM(byte val) -> bool
@@ -24,7 +24,7 @@ namespace eg::m6502
 		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val);
+		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 2);
 	}
 
 	auto test_LDA_ZP(byte val) -> bool
@@ -41,7 +41,7 @@ namespace eg::m6502
 		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val);
+		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 2);
 	}
 
 	auto test_LDA_ZPX(byte val) -> bool
@@ -60,7 +60,7 @@ namespace eg::m6502
 		cpu.test_load_reg_X(0xf0);
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val);
+		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 2);
 	}
 
 	auto test_LDA_ABS(byte val) -> bool
@@ -79,7 +79,7 @@ namespace eg::m6502
 		cpu.test_load_mem(std::move(data));
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val);
+		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 3);
 	}
 
 	auto test_LDA_ABSX(byte val, byte X) -> bool
@@ -103,7 +103,7 @@ namespace eg::m6502
 		cpu.test_load_reg_X(X);
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val);
+		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 3);
 	}
 
 	auto test_LDA_ABSY(byte val, byte Y) -> bool
@@ -127,7 +127,7 @@ namespace eg::m6502
 		cpu.test_load_reg_Y(Y);
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val);
+		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 3);
 	}
 
 	auto test_LDA_INDX(byte val, byte X) -> bool
@@ -152,7 +152,7 @@ namespace eg::m6502
 		cpu.test_load_reg_X(X);
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val);
+		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 2);
 	}
 
 	auto test_LDA_INDY(byte val, byte Y) -> bool
@@ -176,8 +176,9 @@ namespace eg::m6502
 		cpu.test_load_reg_Y(Y);
 		cpu.exec();
 
-		return test_LDA_reg_check(cpu.get_reg(), val);
+		return test_LDA_reg_check(cpu.get_reg(), val, RESET_VECTOR_ADDRESS + 2);
 	}
+
 	auto test_LDA_IM_nzero_nneg() -> bool { return test_LDA_IM('A'); }
 	auto test_LDA_IM_zero_nneg() -> bool { return test_LDA_IM(0); }
 	auto test_LDA_IM_nzero_neg() -> bool { return test_LDA_IM(235); }
