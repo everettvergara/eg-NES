@@ -41,9 +41,11 @@ namespace eg::m6502
 		case INC_ABS: exec_INC_ABS_(); break;
 		case INC_ABSX: exec_INC_ABSX_(); break;
 
-
+		// No Test yet
 		case INX_IMP: exec_INX_IMP_(); break;
 		case INY_IMP: exec_INY_IMP_(); break;
+		case DEX_IMP: exec_DEX_IMP_(); break;
+		case DEY_IMP: exec_DEY_IMP_(); break;
 
 		default:
 			assert(false);

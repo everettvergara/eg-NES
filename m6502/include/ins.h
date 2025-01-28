@@ -52,6 +52,12 @@ namespace eg::m6502
 	// INY - Increment Y
 	constexpr byte INY_IMP = 0xC8;
 
+	// DEX - Decrement X
+	constexpr byte DEX_IMP = 0xCA;
+
+	// DEY - Decrement Y
+	constexpr byte DEY_IMP = 0x88;
+
 	constexpr ins_attrib ins[256] =
 	{
 		{ "-", "-", 0, 0 },		// 0x00 - 0
@@ -142,7 +148,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0x55 - 85
 		{ "-", "-", 0, 0 },		// 0x56 - 86
 		{ "-", "-", 0, 0 },		// 0x57 - 87
-		{ "-", "-", 0, 0 },		// 0x58 - 88
+		{ "DEY", "IMP", 1, 2 },		// 0x58 - 88
 		{ "-", "-", 0, 0 },		// 0x59 - 89
 		{ "-", "-", 0, 0 },		// 0x5A - 90
 		{ "-", "-", 0, 0 },		// 0x5B - 91
@@ -256,7 +262,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xC7 - 199
 		{ "INY", "IMP", 1, 2 },		// 0xC8 - 200
 		{ "-", "-", 0, 0 },		// 0xC9 - 201
-		{ "-", "-", 0, 0 },		// 0xCA - 202
+		{ "DEX", "IMP", 1, 2 },		// 0xCA - 202
 		{ "-", "-", 0, 0 },		// 0xCB - 203
 		{ "-", "-", 0, 0 },		// 0xCC - 204
 		{ "-", "-", 0, 0 },		// 0xCD - 205

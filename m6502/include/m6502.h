@@ -88,5 +88,12 @@ namespace eg::m6502
 
 		// INY
 		auto exec_INY_IMP_() -> void;
+
+		// DEX
+		auto exec_DEX_IMP_() -> void;
+
+		// DEY
+		auto exec_DEY_IMP_() -> void;
+
 	};
 }

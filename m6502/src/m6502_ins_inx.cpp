@@ -2,11 +2,12 @@
 
 namespace eg::m6502
 {
-	auto m6502::exec_INY_IMP_() -> void
+
+	auto m6502::exec_INX_IMP_() -> void
 	{
-		++reg_.Y;
+		++reg_.X;
 		cycles_.simulate();
 
-		set_ZN_(reg_.Y);
+		set_ZN_(reg_.X);
 	}
 }
