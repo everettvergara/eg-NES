@@ -46,6 +46,12 @@ namespace eg::m6502
 	constexpr byte INC_ABS = 0xEE;
 	constexpr byte INC_ABSX = 0xFE;
 
+	// INX - Increment X
+	constexpr byte INX_IMP = 0xE8;
+	
+	// INY - Increment Y
+	constexpr byte INY_IMP = 0xC8;
+
 	constexpr ins_attrib ins[256] =
 	{
 		{ "-", "-", 0, 0 },		// 0x00 - 0
@@ -248,7 +254,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xC5 - 197
 		{ "-", "-", 0, 0 },		// 0xC6 - 198
 		{ "-", "-", 0, 0 },		// 0xC7 - 199
-		{ "-", "-", 0, 0 },		// 0xC8 - 200
+		{ "INY", "IMP", 1, 2 },		// 0xC8 - 200
 		{ "-", "-", 0, 0 },		// 0xC9 - 201
 		{ "-", "-", 0, 0 },		// 0xCA - 202
 		{ "-", "-", 0, 0 },		// 0xCB - 203
@@ -280,7 +286,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0xE5 - 229
 		{ "INC", "ZP", 2, 5 },		// 0xE6 - 230
 		{ "-", "-", 0, 0 },		// 0xE7 - 231
-		{ "-", "-", 0, 0 },		// 0xE8 - 232
+		{ "INX", "IMP", 1, 2 },		// 0xE8 - 232
 		{ "-", "-", 0, 0 },		// 0xE9 - 233
 		{ "NOP", "IMP", 1, 2 },		// 0xEA - 234
 		{ "-", "-", 0, 0 },		// 0xEB - 235

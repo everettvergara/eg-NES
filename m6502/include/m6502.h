@@ -82,5 +82,11 @@ namespace eg::m6502
 		auto exec_INC_ZPX_() -> void;
 		auto exec_INC_ABS_() -> void;
 		auto exec_INC_ABSX_() -> void;
+		
+		// INX
+		auto exec_INX_IMP_() -> void;
+
+		// INY
+		auto exec_INY_IMP_() -> void;
 	};
 }

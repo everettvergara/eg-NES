@@ -1,5 +1,4 @@
-#include "m6502.h"
-#include <cassert>
+#include "m6502.h" 
 
 namespace eg::m6502
 {
