@@ -47,6 +47,11 @@ namespace eg::m6502
 		case DEX_IMP: exec_DEX_IMP_(); break;
 		case DEY_IMP: exec_DEY_IMP_(); break;
 
+		case DEC_ZP: exec_DEC_ZP_(); break;
+		case DEC_ZPX: exec_DEC_ZPX_(); break;
+		case DEC_ABS: exec_DEC_ABS_(); break;
+		case DEC_ABSX: exec_DEC_ABSX_(); break;
+
 		default:
 			assert(false);
 			break;
