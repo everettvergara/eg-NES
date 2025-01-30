@@ -12,6 +12,12 @@
 #include "m6502_tins_ldy.h"
 #include "m6502_tins_nop.h"
 #include "m6502_tins_inc.h"
+#include "m6502_tins_dec.h"
+#include "m6502_tins_inx.h"
+#include "m6502_tins_iny.h"
+#include "m6502_tins_dex.h"
+#include "m6502_tins_dey.h"
+
 
 using namespace eg::m6502;
 TEST_CASE("m6502 Instructions:")
@@ -127,4 +133,56 @@ TEST_CASE("m6502 Instructions:")
 		REQUIRE_NOTHROW([]() {CHECK(test_INC_ABSX_zero_nneg_carry()); }());
 		REQUIRE_NOTHROW([]() {CHECK(test_INC_ABSX_nzero_neg_carry()); }());
 	}
+
+	SECTION("DEC")
+	{
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ZP_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ZP_zero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ZP_nzero_neg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ZPX_nzero_nneg_ncarry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ZPX_zero_nneg_ncarry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ZPX_nzero_neg_ncarry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ZPX_nzero_nneg_carry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ZPX_zero_nneg_carry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ZPX_nzero_neg_carry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ABS_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ABS_zero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ABS_nzero_neg()); }());
+
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ABSX_nzero_nneg_ncarry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ABSX_zero_nneg_ncarry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ABSX_nzero_neg_ncarry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ABSX_nzero_nneg_carry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ABSX_zero_nneg_carry()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEC_ABSX_nzero_neg_carry()); }());
+	}
+
+	SECTION("INX")
+	{
+		REQUIRE_NOTHROW([]() {CHECK(test_INX_IMP_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_INX_IMP_zero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_INX_IMP_nzero_neg()); }());
+	}
+
+	SECTION("INY")
+	{
+		REQUIRE_NOTHROW([]() {CHECK(test_INY_IMP_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_INY_IMP_zero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_INY_IMP_nzero_neg()); }());
+	}
+
+	SECTION("DEX")
+	{
+		REQUIRE_NOTHROW([]() {CHECK(test_DEX_IMP_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEX_IMP_zero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEX_IMP_nzero_neg()); }());
+	}
+
+	SECTION("DEY")
+	{
+		REQUIRE_NOTHROW([]() {CHECK(test_DEY_IMP_nzero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEY_IMP_zero_nneg()); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_DEY_IMP_nzero_neg()); }());
+	}
+
 }

@@ -13,6 +13,8 @@ add_library(eg_m6502 STATIC
 	"src/m6502_ins_nop.cpp"
 	"src/m6502_ins_inc.cpp"
 	"src/m6502_ins_dec.cpp"
+	"src/m6502_ins_dex.cpp"
+	"src/m6502_ins_dey.cpp"
 	"src/m6502_ins_inx.cpp" 
 	"src/m6502_ins_iny.cpp"
 	"src/reg.cpp"
@@ -31,6 +33,12 @@ add_executable (eg_m6502_run_test
 	"test/src/m6502_tins_ldy.cpp"
 	"test/src/m6502_tins_nop.cpp"
 	"test/src/m6502_tins_inc.cpp"
+	"test/src/m6502_tins_dec.cpp"
+	"test/src/m6502_tins_inx.cpp"
+	"test/src/m6502_tins_iny.cpp"
+	"test/src/m6502_tins_dex.cpp"
+	"test/src/m6502_tins_dey.cpp"
+
 	"test/src/m6502_generic.cpp")
 
 target_link_libraries(eg_m6502_run_test PRIVATE 
