@@ -16,6 +16,12 @@ Another 6502 Emulator for NES written in Modern C++.
 Looking for co-maintainer, email me at everettvergara@gmail.com;
 
 ## Logs
+### 2025-01-30:
+6502 Emulator: Implementation and Unit Test - DEC_ZP, DEC_ZPX, DEC_ABS, DEC_ABSX
+6502 Emulator: Implementation and Unit Test - DEX_IMP
+6502 Emulator: Implementation and Unit Test - DEY_IMP
+6502 Emulator: Implementation and Unit Test - INX_IMP
+6502 Emulator: Implementation and Unit Test - INY_IMP
 
 ### 2025-01-25:
 6502 Emulator: Implementation and Unit Test - LDX_IM, LDX_ZP, LDX_ZPY, LDX_ABS,  LDX_ABSY
