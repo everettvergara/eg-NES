@@ -2,6 +2,13 @@
 
 #include <array>
 #include "types.h"
+/*
+ADC, AND, ASL, BCC, BCS, BEQ, BIT, BMI, BNE, BPL, BRK, BVC, BVS, CLC,
+CLD, CLI, CLV, CMP, CPX, CPY, *DEC, *DEX, *DEY, EOR, *INC, *INX, *INY, JMP,
+JSR, *LDA, *LDX, *LDY, LSR, *NOP, ORA, PHA, PHP, PLA, PLP, ROL, ROR, RTI,
+RTS, SBC, SEC, SED, SEI, STA, STX, STY, TAX, TAY, TSX, TXA, TXS, TYA,
+*/
+
 
 namespace eg::m6502
 {
@@ -63,6 +70,10 @@ namespace eg::m6502
 
 	// DEY - Decrement Y
 	constexpr byte DEY_IMP = 0x88;
+
+	// JMP - Jump
+	constexpr byte JMP_ABS = 0x4C;
+	constexpr byte JMP_IND = 0x6C;
 
 	constexpr ins_attrib ins[256] =
 	{
@@ -142,7 +153,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0x49 - 73
 		{ "-", "-", 0, 0 },		// 0x4A - 74
 		{ "-", "-", 0, 0 },		// 0x4B - 75
-		{ "-", "-", 0, 0 },		// 0x4C - 76
+		{ "JMP", "ABS", 3, 3 },		// 0x4C - 76
 		{ "-", "-", 0, 0 },		// 0x4D - 77
 		{ "-", "-", 0, 0 },		// 0x4E - 78
 		{ "-", "-", 0, 0 },		// 0x4F - 79
@@ -174,7 +185,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0x69 - 105
 		{ "-", "-", 0, 0 },		// 0x6A - 106
 		{ "-", "-", 0, 0 },		// 0x6B - 107
-		{ "-", "-", 0, 0 },		// 0x6C - 108
+		{ "JMP", "IND", 3, 5 },		// 0x6C - 108
 		{ "-", "-", 0, 0 },		// 0x6D - 109
 		{ "-", "-", 0, 0 },		// 0x6E - 110
 		{ "-", "-", 0, 0 },		// 0x6F - 111

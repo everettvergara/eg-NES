@@ -44,6 +44,8 @@ namespace eg::m6502
 		const word reset_vector_addr_;
 		const word reset_routine_addr_;
 
+
+
 		cycle cycles_;
 		reg reg_;
 		mem mem_;
@@ -100,6 +102,11 @@ namespace eg::m6502
 
 		// DEY
 		auto exec_DEY_IMP_() -> void;
+
+		// JMP	
+		auto exec_JMP_ABS_() -> void;
+		auto exec_JMP_IND_() -> void;
+
 
 	};
 }
