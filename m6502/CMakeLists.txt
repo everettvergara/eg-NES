@@ -17,6 +17,7 @@ add_library(eg_m6502 STATIC
 	"src/m6502_ins_dey.cpp"
 	"src/m6502_ins_inx.cpp" 
 	"src/m6502_ins_iny.cpp"
+	"src/m6502_ins_jmp.cpp"
 	"src/reg.cpp"
 	"src/sr.cpp")
 target_include_directories(eg_m6502 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
@@ -38,6 +39,7 @@ add_executable (eg_m6502_run_test
 	"test/src/m6502_tins_iny.cpp"
 	"test/src/m6502_tins_dex.cpp"
 	"test/src/m6502_tins_dey.cpp"
+	"test/src/m6502_tins_jmp.cpp"
 
 	"test/src/m6502_generic.cpp")
 

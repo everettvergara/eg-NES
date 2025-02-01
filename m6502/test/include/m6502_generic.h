@@ -8,7 +8,7 @@ namespace eg::m6502
 	{
 	public:
 
-		m6502_generic(word reset_vector_add, word reset_routine_addr);
+		m6502_generic(word reset_vector_add, word reset_routine_addr, extra extra = {});
 		auto reset() -> void final;
 
 		auto test_loader() -> void;

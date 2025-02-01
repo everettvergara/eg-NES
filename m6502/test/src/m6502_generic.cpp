@@ -1,10 +1,10 @@
-#include "m6502_generic.h"
+#include "m6502_generic.h" 
 #include <cstdlib>
 
 namespace eg::m6502
 {
-	m6502_generic::m6502_generic(word reset_vector_add, word reset_routine_addr) :
-		m6502(reset_vector_add, reset_routine_addr)
+	m6502_generic::m6502_generic(word reset_vector_add, word reset_routine_addr, extra extra) :
+		m6502(reset_vector_add, reset_routine_addr, extra)
 	{
 	}
 

@@ -18,7 +18,10 @@ namespace eg::m6502
 
 	auto cycle::simulate() -> void
 	{
-		assert(cycles_ > 0);
+		if (cycles_ <= 0)
+		{
+			throw std::runtime_error("Cycles already zero.");
+		}
 
 		--cycles_;
 

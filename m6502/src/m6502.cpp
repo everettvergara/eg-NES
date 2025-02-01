@@ -3,9 +3,10 @@
 
 namespace eg::m6502
 {
-	m6502::m6502(word reset_vector_add, word reset_routine_addr) :
+	m6502::m6502(word reset_vector_add, word reset_routine_addr, extra extra) :
 		reset_vector_addr_(reset_vector_add),
-		reset_routine_addr_(reset_routine_addr)
+		reset_routine_addr_(reset_routine_addr),
+		extra_(extra)
 	{
 	}
 
@@ -55,14 +56,18 @@ namespace eg::m6502
 		case JMP_IND: exec_JMP_IND_(); break;
 
 		default:
-			assert(false);
+			throw std::runtime_error("Unsupported INSTRUCTION.");
 			break;
 		}
 
-		assert(cycles_.is_zero());
+		if (not cycles_.is_zero())
+		{
+			throw std::runtime_error("Cycles not zero.");
+		}
 	}
 
 	// DOES NOT increments PC
+	// Read from Zero Page
 	auto m6502::read_mem_by_badd(byte address) -> byte
 	{
 		cycles_.simulate();

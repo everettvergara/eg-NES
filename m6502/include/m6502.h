@@ -8,6 +8,7 @@
 #include "ins.h"
 #include "cycle.h"
 #include "mem.h"
+#include "extra.h"
 
 namespace eg::m6502
 {
@@ -15,7 +16,7 @@ namespace eg::m6502
 	{
 	public:
 
-		m6502(word reset_vector_add, word reset_routine_addr);
+		m6502(word reset_vector_add, word reset_routine_addr, extra extra);
 
 		m6502(const m6502&) = delete;
 		m6502& operator=(const m6502&) = delete;
@@ -44,11 +45,10 @@ namespace eg::m6502
 		const word reset_vector_addr_;
 		const word reset_routine_addr_;
 
-
-
 		cycle cycles_;
 		reg reg_;
 		mem mem_;
+		extra extra_;
 
 		auto set_ZN_(byte value) -> void;
 

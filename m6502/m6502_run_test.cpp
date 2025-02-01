@@ -17,11 +17,13 @@
 #include "m6502_tins_iny.h"
 #include "m6502_tins_dex.h"
 #include "m6502_tins_dey.h"
+#include "m6502_tins_jmp.h"
 
 
 using namespace eg::m6502;
 TEST_CASE("m6502 Instructions:")
 {
+
 	SECTION("LDA")
 	{
 		REQUIRE_NOTHROW([]() {CHECK(test_LDA_IM_nzero_nneg()); }());
@@ -185,4 +187,10 @@ TEST_CASE("m6502 Instructions:")
 		REQUIRE_NOTHROW([]() {CHECK(test_DEY_IMP_nzero_neg()); }());
 	}
 
+	SECTION("JMP")
+	{
+		REQUIRE_NOTHROW([]() {CHECK(test_JMP_ABS(0x50, 0x30)); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_JMP_IND(0x60)); }());
+		REQUIRE_NOTHROW([]() {CHECK(test_JMP_IND_bug(0x60)); }());
+	}
 }

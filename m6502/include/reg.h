@@ -13,7 +13,5 @@ namespace eg::m6502
 		byte Y;			// Y register	(8 bit)
 		byte SP;		// Stack pointer(8 bit)
 		sr SR;			// Status register(8 bit)
-
-		bool has_JMP_IND_bug = true;
 	};
 }
