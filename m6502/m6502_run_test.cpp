@@ -18,6 +18,7 @@
 #include "m6502_tins_dex.h"
 #include "m6502_tins_dey.h"
 #include "m6502_tins_jmp.h"
+#include "m6502_tins_adc.h"
 
 
 using namespace eg::m6502;
@@ -193,4 +194,14 @@ TEST_CASE("m6502 Instructions:")
 		REQUIRE_NOTHROW([]() {CHECK(test_JMP_IND(0x60)); }());
 		REQUIRE_NOTHROW([]() {CHECK(test_JMP_IND_bug(0x60)); }());
 	}
+
+	SECTION("ADC")
+	{
+		REQUIRE_NOTHROW([]() {CHECK(test_ADC_IM_nzero_nneg_ncarry_noverflow()); }());
+		//REQUIRE_NOTHROW([]() {CHECK(test_ADC_IM_zero_nneg_ncarry_noverflow()); }());
+		//REQUIRE_NOTHROW([]() {CHECK(test_ADC_IM_nzero_nneg_carry_noverflow()); }());
+		//REQUIRE_NOTHROW([]() {CHECK(test_ADC_IM_nzero_neg_carry_noverflow()); }());
+
+	}
+
 }

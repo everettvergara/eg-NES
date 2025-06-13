@@ -75,6 +75,9 @@ namespace eg::m6502
 	constexpr byte JMP_ABS = 0x4C;
 	constexpr byte JMP_IND = 0x6C;
 
+	// ADC - Add with Carry
+	constexpr byte ADC_IM = 0x69;
+
 	constexpr ins_attrib ins[256] =
 	{
 		{ "-", "-", 0, 0 },		// 0x00 - 0
@@ -182,7 +185,7 @@ namespace eg::m6502
 		{ "-", "-", 0, 0 },		// 0x66 - 102
 		{ "-", "-", 0, 0 },		// 0x67 - 103
 		{ "-", "-", 0, 0 },		// 0x68 - 104
-		{ "-", "-", 0, 0 },		// 0x69 - 105
+		{ "ADC", "IM", 2, 2 },		// 0x69 - 105
 		{ "-", "-", 0, 0 },		// 0x6A - 106
 		{ "-", "-", 0, 0 },		// 0x6B - 107
 		{ "JMP", "IND", 3, 5 },		// 0x6C - 108

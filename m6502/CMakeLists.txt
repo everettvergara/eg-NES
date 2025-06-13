@@ -1,6 +1,16 @@
 ﻿
 project(eg_m6502)
 
+# Ensure vcpkg integration is recognized
+#if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+#    set(CMAKE_TOOLCHAIN_FILE "C:/Program Files/vcpkg-master/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+#endif()
+
+
+#find_package(CURL REQUIRED)
+find_package(Catch2 REQUIRED)
+
+
 # Libs
 # --
 add_library(eg_m6502 STATIC
@@ -18,6 +28,8 @@ add_library(eg_m6502 STATIC
 	"src/m6502_ins_inx.cpp" 
 	"src/m6502_ins_iny.cpp"
 	"src/m6502_ins_jmp.cpp"
+	"src/m6502_ins_adc.cpp"
+
 	"src/reg.cpp"
 	"src/sr.cpp")
 target_include_directories(eg_m6502 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
@@ -25,7 +37,6 @@ target_include_directories(eg_m6502 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
 
 # Test eg_m6502.lib
 # --
-find_package(Catch2 REQUIRED)
 
 add_executable (eg_m6502_run_test 
 	"m6502_run_test.cpp"
@@ -40,6 +51,7 @@ add_executable (eg_m6502_run_test
 	"test/src/m6502_tins_dex.cpp"
 	"test/src/m6502_tins_dey.cpp"
 	"test/src/m6502_tins_jmp.cpp"
+	"test/src/m6502_tins_adc.cpp"
 
 	"test/src/m6502_generic.cpp")
 

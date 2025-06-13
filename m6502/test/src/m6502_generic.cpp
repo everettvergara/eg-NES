@@ -24,6 +24,11 @@ namespace eg::m6502
 		mem_ = std::move(m);
 	}
 
+	auto m6502_generic::test_load_reg_A(byte A) -> void
+	{
+		reg_.AC = A;
+	}
+
 	auto m6502_generic::test_load_reg_X(byte X) -> void
 	{
 		reg_.X = X;
@@ -33,6 +38,12 @@ namespace eg::m6502
 	{
 		reg_.Y = Y;
 	}
+
+	auto m6502_generic::test_load_reg_SR_C(bool C) -> void
+	{
+		reg_.SR.C = C ? 1 : 0;
+	}
+
 
 	auto m6502_generic::test_load_rnd_reg() -> reg
 	{

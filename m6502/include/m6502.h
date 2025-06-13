@@ -51,6 +51,7 @@ namespace eg::m6502
 		extra extra_;
 
 		auto set_ZN_(byte value) -> void;
+		//auto set_CVZN_(word value) -> void;
 
 		// LDA
 		auto exec_LDA_IM_() -> void;
@@ -107,6 +108,8 @@ namespace eg::m6502
 		auto exec_JMP_ABS_() -> void;
 		auto exec_JMP_IND_() -> void;
 
+		// ADC
+		auto exec_ADC_IM_() -> void;
 
 	};
 }

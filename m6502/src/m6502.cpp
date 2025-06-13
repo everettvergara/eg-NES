@@ -22,38 +22,34 @@ namespace eg::m6502
 		case LDA_ABSY: exec_LDA_ABSY_(); break;
 		case LDA_INDX: exec_LDA_INDX_(); break;
 		case LDA_INDY: exec_LDA_INDY_(); break;
-
 		case LDX_IM: exec_LDX_IM_(); break;
 		case LDX_ZP: exec_LDX_ZP_(); break;
 		case LDX_ZPY: exec_LDX_ZPY_(); break;
 		case LDX_ABS: exec_LDX_ABS_(); break;
 		case LDX_ABSY: exec_LDX_ABSY_(); break;
-
 		case LDY_IM: exec_LDY_IM_(); break;
 		case LDY_ZP: exec_LDY_ZP_(); break;
 		case LDY_ZPX: exec_LDY_ZPX_(); break;
 		case LDY_ABS: exec_LDY_ABS_(); break;
 		case LDY_ABSX: exec_LDY_ABSX_(); break;
-
 		case NOP_IMP: exec_NOP_IMP_(); break;
-
 		case INC_ZP: exec_INC_ZP_(); break;
 		case INC_ZPX: exec_INC_ZPX_(); break;
 		case INC_ABS: exec_INC_ABS_(); break;
 		case INC_ABSX: exec_INC_ABSX_(); break;
-
 		case INX_IMP: exec_INX_IMP_(); break;
 		case INY_IMP: exec_INY_IMP_(); break;
 		case DEX_IMP: exec_DEX_IMP_(); break;
 		case DEY_IMP: exec_DEY_IMP_(); break;
-
 		case DEC_ZP: exec_DEC_ZP_(); break;
 		case DEC_ZPX: exec_DEC_ZPX_(); break;
 		case DEC_ABS: exec_DEC_ABS_(); break;
 		case DEC_ABSX: exec_DEC_ABSX_(); break;
-
 		case JMP_ABS: exec_JMP_ABS_(); break;
 		case JMP_IND: exec_JMP_IND_(); break;
+
+
+		case ADC_IM: exec_ADC_IM_(); break;
 
 		default:
 			throw std::runtime_error("Unsupported INSTRUCTION.");
@@ -140,4 +136,11 @@ namespace eg::m6502
 		reg_.SR.Z = (value == 0);
 		reg_.SR.N = (value & 0b10000000) > 0;
 	}
+
+	//auto m6502::set_CVZN_(word value) -> void
+	//{
+	//	reg_.SR.C = value > 0xff;
+	//	reg_.SR.V = (~(reg_.AC ^ value) & (reg_.AC ^ static_cast<byte>(value)) & 0x80) > 0;
+	//	set_ZN_(value);
+	//}
 }
